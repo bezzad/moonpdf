@@ -291,53 +291,7 @@ namespace MoonPdfLib.MuPdf
 		}
 	}
 
-	internal struct Rectangle
-	{
-		public float Left, Top, Right, Bottom;
-
-		public float Width => Right - Left;
-		public float Height => Bottom - Top;
-	}
-
 #pragma warning disable 0649
-	internal struct BBox
-	{
-		public int Left, Top, Right, Bottom;
-	}
 
-	internal struct Matrix
-	{
-		public float A, B, C, D, E, F;
-	}
 #pragma warning restore 0649
-
-	public class MissingOrInvalidPdfPasswordException : Exception
-	{
-		public MissingOrInvalidPdfPasswordException()
-			: base("A password for the pdf document was either not provided or is invalid.")
-		{ }
-	}
-
-	public interface IPdfSource
-	{ }
-
-	public class FileSource : IPdfSource
-	{
-		public string Filename { get; private set; }
-
-		public FileSource(string filename)
-		{
-			Filename = filename;
-		}
-	}
-
-	public class MemorySource : IPdfSource
-	{
-		public byte[] Bytes { get; private set; }
-
-		public MemorySource(byte[] bytes)
-		{
-			Bytes = bytes;
-		}
-	}
 }

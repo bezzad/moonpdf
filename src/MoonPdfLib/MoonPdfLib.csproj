@@ -94,10 +94,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\Dpi.cs" />
     <Compile Include="Helper\DpiHelper.cs" />
     <Compile Include="Helper\ListExtension.cs" />
     <Compile Include="Helper\BitmapExtensionMethods.cs" />
     <Compile Include="Helper\PageHelper.cs" />
+    <Compile Include="ImageRotation.cs" />
     <Compile Include="IMoonPdfPanel.cs" />
     <Compile Include="ContinuousMoonPdfPanel.xaml.cs">
       <DependentUpon>ContinuousMoonPdfPanel.xaml</DependentUpon>
@@ -106,9 +108,17 @@
       <DependentUpon>MoonPdfPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="MoonPdfPanelInputHandler.cs" />
+    <Compile Include="MuPdf\BBox.cs" />
+    <Compile Include="MuPdf\FileSource.cs" />
+    <Compile Include="MuPdf\IPdfSource.cs" />
+    <Compile Include="MuPdf\Matrix.cs" />
+    <Compile Include="MuPdf\MemorySource.cs" />
+    <Compile Include="MuPdf\MissingOrInvalidPdfPasswordException.cs" />
     <Compile Include="MuPdf\MuPdfWrapper.cs" />
+    <Compile Include="MuPdf\Rectangle.cs" />
     <Compile Include="PageDisplaySettings.cs" />
     <Compile Include="PageRowDisplayType.cs" />
+    <Compile Include="PasswordRequiredEventArgs.cs" />
     <Compile Include="PdfImage.cs" />
     <Compile Include="PdfImageProvider.cs" />
     <Compile Include="PageRowBound.cs" />

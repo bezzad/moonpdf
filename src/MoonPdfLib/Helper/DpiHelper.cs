@@ -54,10 +54,4 @@ namespace MoonPdfLib.Helper
             LOGPIXELSY = 90
         }      
     }
-
-    internal class Dpi
-    {
-        public float HorizontalDpi { get; set; }
-        public float VerticalDpi { get; set; }
-    }
 }
