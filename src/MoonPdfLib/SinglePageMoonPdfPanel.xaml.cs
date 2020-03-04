@@ -80,17 +80,11 @@ namespace MoonPdfLib
             this.imageProvider = null;
         }
 
-		ScrollViewer IMoonPdfPanel.ScrollViewer
-		{
-			get { return this.scrollViewer; }
-		}
+		ScrollViewer IMoonPdfPanel.ScrollViewer => this.scrollViewer;
 
-		UserControl IMoonPdfPanel.Instance
-		{
-			get { return this; }
-		}
+        UserControl IMoonPdfPanel.Instance => this;
 
-		void IMoonPdfPanel.GotoPage(int pageNumber)
+        void IMoonPdfPanel.GotoPage(int pageNumber)
 		{
 			currentPageIndex = pageNumber - 1;
 			this.SetItemsSource();

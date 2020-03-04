@@ -181,18 +181,12 @@ namespace MouseKeyboardActivityMonitor
         /// <summary>
         /// True if event contains information about wheel scroll.
         /// </summary>
-        public bool WheelScrolled
-        {
-            get { return Delta != 0; }
-        }
+        public bool WheelScrolled => Delta != 0;
 
         /// <summary>
         /// True if event signals a click. False if it was only a move or wheel scroll.
         /// </summary>
-        public bool Clicked
-        {
-            get { return Clicks > 0; }
-        }
+        public bool Clicked => Clicks > 0;
 
         /// <summary>
         /// True if event singnals mouse button down.
@@ -224,11 +218,6 @@ namespace MouseKeyboardActivityMonitor
         /// <summary>
         /// 
         /// </summary>
-        internal Point Point { 
-            get
-            {
-                return new Point(X, Y);
-            }
-        }
+        internal Point Point => new Point(X, Y);
     }
 }

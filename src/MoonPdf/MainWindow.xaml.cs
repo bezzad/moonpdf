@@ -40,9 +40,9 @@ namespace MoonPdf
 		private static string appName;
 		private MainWindowDataContext dataContext;
 
-		internal MoonPdfPanel MoonPdfPanel { get { return this.moonPdfPanel; } }
+		internal MoonPdfPanel MoonPdfPanel => this.moonPdfPanel;
 
-		public MainWindow()
+        public MainWindow()
 		{
 			InitializeComponent();
 

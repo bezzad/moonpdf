@@ -227,14 +227,8 @@ namespace MoonPdfLib
 			return pageIndex;
 		}
 
-		ScrollViewer IMoonPdfPanel.ScrollViewer
-		{
-			get { return this.scrollViewer; }
-		}
+		ScrollViewer IMoonPdfPanel.ScrollViewer => this.scrollViewer;
 
-		UserControl IMoonPdfPanel.Instance
-		{
-			get { return this; }
-		}
-	}
+        UserControl IMoonPdfPanel.Instance => this;
+    }
 }

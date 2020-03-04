@@ -85,12 +85,9 @@ namespace MoonPdfLib.Virtualizing
 		/// Gets the items provider.
 		/// </summary>
 		/// <value>The items provider.</value>
-		public IItemsProvider<T> ItemsProvider
-		{
-			get { return _itemsProvider; }
-		}
+		public IItemsProvider<T> ItemsProvider => _itemsProvider;
 
-		#endregion
+        #endregion
 
 		#region PageSize
 
@@ -100,12 +97,9 @@ namespace MoonPdfLib.Virtualizing
 		/// Gets the size of the page.
 		/// </summary>
 		/// <value>The size of the page.</value>
-		public int PageSize
-		{
-			get { return _pageSize; }
-		}
+		public int PageSize => _pageSize;
 
-		#endregion
+        #endregion
 
 		private readonly TimeSpan _pageTimeout = TimeSpan.Zero;
 
@@ -133,11 +127,8 @@ namespace MoonPdfLib.Virtualizing
 				}
 				return _count;
 			}
-			protected set
-			{
-				_count = value;
-			}
-		}
+			protected set => _count = value;
+        }
 
 		#endregion
 
@@ -177,14 +168,14 @@ namespace MoonPdfLib.Virtualizing
 				// return requested item
 				return _pages[pageIndex][pageOffset];
 			}
-			set { throw new NotSupportedException(); }
-		}
+			set => throw new NotSupportedException();
+        }
 
 		object IList.this[int index]
 		{
-			get { return this[index]; }
-			set { throw new NotSupportedException(); }
-		}
+			get => this[index];
+            set => throw new NotSupportedException();
+        }
 
 		#endregion
 
@@ -405,45 +396,33 @@ namespace MoonPdfLib.Virtualizing
 		/// <returns>
 		/// An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
 		/// </returns>
-		public object SyncRoot
-		{
-			get { return this; }
-		}
+		public object SyncRoot => this;
 
-		/// <summary>
+        /// <summary>
 		/// Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe).
 		/// </summary>
 		/// <value></value>
 		/// <returns>Always false.
 		/// </returns>
-		public bool IsSynchronized
-		{
-			get { return false; }
-		}
+		public bool IsSynchronized => false;
 
-		/// <summary>
+        /// <summary>
 		/// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
 		/// </summary>
 		/// <value></value>
 		/// <returns>Always true.
 		/// </returns>
-		public bool IsReadOnly
-		{
-			get { return true; }
-		}
+		public bool IsReadOnly => true;
 
-		/// <summary>
+        /// <summary>
 		/// Gets a value indicating whether the <see cref="T:System.Collections.IList"/> has a fixed size.
 		/// </summary>
 		/// <value></value>
 		/// <returns>Always false.
 		/// </returns>
-		public bool IsFixedSize
-		{
-			get { return false; }
-		}
+		public bool IsFixedSize => false;
 
-		#endregion
+        #endregion
 
 		#endregion
 

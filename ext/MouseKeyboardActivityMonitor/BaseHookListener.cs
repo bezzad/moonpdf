@@ -38,13 +38,7 @@ namespace MouseKeyboardActivityMonitor
         /// </summary>
         protected HookCallback HookCallbackReferenceKeeper { get; set; }
 
-        internal bool IsGlobal
-        {
-            get
-            {
-                return m_Hooker.IsGlobal;
-            }
-        }
+        internal bool IsGlobal => m_Hooker.IsGlobal;
 
         /// <summary>
         /// Override this method to modify logic of firing events.
@@ -146,7 +140,7 @@ namespace MouseKeyboardActivityMonitor
         /// </value>
         public bool Enabled
         {
-            get { return HookHandle != 0; }
+            get => HookHandle != 0;
             set
             {
                 bool mustEnable = value;

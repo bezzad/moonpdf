@@ -23,10 +23,7 @@ namespace MouseKeyboardActivityMonitor.WinApi
             return hookHandle;
         }
 
-        internal override bool IsGlobal
-        {
-            get { return true; }
-        }
+        internal override bool IsGlobal => true;
 
         /// <summary>
         /// Windows NT/2000/XP/Vista/7: Installs a hook procedure that monitors low-level mouse input events.

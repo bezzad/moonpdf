@@ -310,53 +310,35 @@ namespace MoonPdfLib.Virtualizing
 
 		public ScrollViewer ScrollOwner
 		{
-			get { return _owner; }
-			set { _owner = value; }
-		}
+			get => _owner;
+            set => _owner = value;
+        }
 
 		public bool CanHorizontallyScroll
 		{
-			get { return _canHScroll; }
-			set { _canHScroll = value; }
-		}
+			get => _canHScroll;
+            set => _canHScroll = value;
+        }
 
 		public bool CanVerticallyScroll
 		{
-			get { return _canVScroll; }
-			set { _canVScroll = value; }
-		}
+			get => _canVScroll;
+            set => _canVScroll = value;
+        }
 
-		public double HorizontalOffset
-		{
-			get { return _offset.X; }
-		}
+		public double HorizontalOffset => _offset.X;
 
-		public double VerticalOffset
-		{
-			get { return _offset.Y; }
-		}
+        public double VerticalOffset => _offset.Y;
 
-		public double ExtentHeight
-		{
-			get { return _extent.Height; }
-		}
+        public double ExtentHeight => _extent.Height;
 
-		public double ExtentWidth
-		{
-			get { return _extent.Width; }
-		}
+        public double ExtentWidth => _extent.Width;
 
-		public double ViewportHeight
-		{
-			get { return _viewport.Height; }
-		}
+        public double ViewportHeight => _viewport.Height;
 
-		public double ViewportWidth
-		{
-			get { return _viewport.Width; }
-		}
+        public double ViewportWidth => _viewport.Width;
 
-		private double CalculateVerticalScrollOffset()
+        private double CalculateVerticalScrollOffset()
 		{
 			return ViewportHeight * 0.06;
 		}

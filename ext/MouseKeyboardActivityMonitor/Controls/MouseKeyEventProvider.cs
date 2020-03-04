@@ -35,12 +35,10 @@ namespace MouseKeyboardActivityMonitor.Controls
         /// </value>
         public bool Enabled
         {
-            get
-            {
-                return DesignMode
-                           ? DesignTimeEnabled
-                           : RunTimeEnabled;
-            }
+            get =>
+                DesignMode
+                    ? DesignTimeEnabled
+                    : RunTimeEnabled;
             set
             {
                 if (DesignMode)
@@ -61,10 +59,7 @@ namespace MouseKeyboardActivityMonitor.Controls
 
         private bool RunTimeEnabled
         {
-            get
-            {
-                return m_MouseHookManager.Enabled && m_KeyboardHookManager.Enabled;
-            }
+            get => m_MouseHookManager.Enabled && m_KeyboardHookManager.Enabled;
             set
             {
                 m_MouseHookManager.Enabled = value;
@@ -78,12 +73,10 @@ namespace MouseKeyboardActivityMonitor.Controls
         ///</summary>
         public HookType HookType
         {
-            get
-            {
-                return m_MouseHookManager.IsGlobal
-                           ? HookType.Global
-                           : HookType.Application;
-            }
+            get =>
+                m_MouseHookManager.IsGlobal
+                    ? HookType.Global
+                    : HookType.Application;
             set
             {
                 Hooker hooker;
@@ -109,13 +102,7 @@ namespace MouseKeyboardActivityMonitor.Controls
         /// <summary>
         /// This component raises events. The value is always true.
         /// </summary>
-        protected override bool CanRaiseEvents
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool CanRaiseEvents => true;
 
         /// <summary>
         /// 

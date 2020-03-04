@@ -299,9 +299,8 @@ namespace MoonPdfLib.MuPdf
     {
         public float Left, Top, Right, Bottom;
 
-        public float Width { get { return this.Right - this.Left; } }
-        public float Height { get { return this.Bottom - this.Top; } }
-
+        public float Width => this.Right - this.Left;
+        public float Height => this.Bottom - this.Top;
     }
 
 #pragma warning disable 0649

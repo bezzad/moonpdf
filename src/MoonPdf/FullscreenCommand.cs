@@ -79,8 +79,8 @@ namespace MoonPdf
 
 			public bool IsFullscreen
 			{
-				get { return isFullscreen; }
-				private set
+				get => isFullscreen;
+                private set
 				{
 					if( value != isFullscreen )
 					{

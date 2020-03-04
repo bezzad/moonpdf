@@ -34,10 +34,7 @@ namespace MouseKeyboardActivityMonitor.WinApi
             return hookHandle;
         }
 
-        internal override bool IsGlobal
-        {
-            get { return false; }
-        }
+        internal override bool IsGlobal => false;
 
         /// <summary>
         /// Retrieves the unmanaged thread identifier of the calling thread.

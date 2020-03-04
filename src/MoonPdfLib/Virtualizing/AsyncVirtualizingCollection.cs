@@ -79,12 +79,9 @@ namespace MoonPdfLib.Virtualizing
 		/// the current SynchronizationContext when the AsyncVirtualizingCollection is created.
 		/// </summary>
 		/// <value>The synchronization context.</value>
-		protected SynchronizationContext SynchronizationContext
-		{
-			get { return _synchronizationContext; }
-		}
+		protected SynchronizationContext SynchronizationContext => _synchronizationContext;
 
-		#endregion
+        #endregion
 
 		#region INotifyCollectionChanged
 
@@ -157,11 +154,8 @@ namespace MoonPdfLib.Virtualizing
 		/// </value>
 		public bool IsLoading
 		{
-			get
-			{
-				return _isLoading;
-			}
-			set
+			get => _isLoading;
+            set
 			{
 				if (value != _isLoading)
 				{

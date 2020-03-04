@@ -35,9 +35,6 @@ namespace MoonPdfLib
 			this.HorizontalOffset = horizontalOffset;
 		}
 
-		public Size SizeIncludingOffset
-		{
-			get { return new Size(this.Size.Width + this.HorizontalOffset, this.Size.Height + this.VerticalOffset); }
-		}
-	}
+		public Size SizeIncludingOffset => new Size(this.Size.Width + this.HorizontalOffset, this.Size.Height + this.VerticalOffset);
+    }
 }
