@@ -21,8 +21,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace MoonPdfLib.Virtualizing
@@ -81,7 +79,7 @@ namespace MoonPdfLib.Virtualizing
 		/// <value>The synchronization context.</value>
 		protected SynchronizationContext SynchronizationContext => _synchronizationContext;
 
-        #endregion
+		#endregion
 
 		#region INotifyCollectionChanged
 
@@ -97,8 +95,7 @@ namespace MoonPdfLib.Virtualizing
 		protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
 		{
 			var h = CollectionChanged;
-			if (h != null)
-				h(this, e);
+			h?.Invoke(this, e);
 		}
 
 		/// <summary>
@@ -126,8 +123,7 @@ namespace MoonPdfLib.Virtualizing
 		protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
 		{
 			var h = PropertyChanged;
-			if (h != null)
-				h(this, e);
+			h?.Invoke(this, e);
 		}
 
 		/// <summary>
@@ -155,7 +151,7 @@ namespace MoonPdfLib.Virtualizing
 		public bool IsLoading
 		{
 			get => _isLoading;
-            set
+			set
 			{
 				if (value != _isLoading)
 				{

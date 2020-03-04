@@ -32,7 +32,7 @@ namespace MoonPdfLib
 		private bool preFetch;
 		private string password;
 
-		public PageDisplaySettings Settings { get; private set; }
+		public PageDisplaySettings Settings { get; }
 
 		public PdfImageProvider(IPdfSource pdfSource, int totalPages, PageDisplaySettings settings, bool preFetch = true, string password = null)
 		{

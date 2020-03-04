@@ -14,26 +14,14 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 !*/
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
+using MoonPdfLib.Helper;
 using MoonPdfLib.MuPdf;
 using MoonPdfLib.Virtualizing;
-using MoonPdfLib.Helper;
-using System.IO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace MoonPdfLib
 {
@@ -44,7 +32,7 @@ namespace MoonPdfLib
 		private CustomVirtualizingPanel virtualPanel;
 		private PdfImageProvider imageProvider;
 		private VirtualizingCollection<IEnumerable<PdfImage>> virtualizingPdfPages;
-						
+
 		public ContinuousMoonPdfPanel(MoonPdfPanel parent)
 		{
 			InitializeComponent();
@@ -58,56 +46,55 @@ namespace MoonPdfLib
 			scrollViewer = VisualTreeHelperEx.FindChild<ScrollViewer>(this);
 		}
 
-        public void Load(IPdfSource source, string password = null)
-        {
-            virtualPanel = VisualTreeHelperEx.FindChild<CustomVirtualizingPanel>(this);
-            scrollViewer = VisualTreeHelperEx.FindChild<ScrollViewer>(this);
-            virtualPanel.PageRowBounds = parent.PageRowBounds.Select(f => f.SizeIncludingOffset).ToArray();
-            imageProvider = new PdfImageProvider(source, parent.TotalPages,
-                                        new PageDisplaySettings(parent.GetPagesPerRow(), parent.ViewType, parent.HorizontalMargin, parent.Rotation),
-                                        password: password);
+		public void Load(IPdfSource source, string password = null)
+		{
+			virtualPanel = VisualTreeHelperEx.FindChild<CustomVirtualizingPanel>(this);
+			scrollViewer = VisualTreeHelperEx.FindChild<ScrollViewer>(this);
+			virtualPanel.PageRowBounds = parent.PageRowBounds.Select(f => f.SizeIncludingOffset).ToArray();
+			imageProvider = new PdfImageProvider(source, parent.TotalPages,
+										new PageDisplaySettings(parent.GetPagesPerRow(), parent.ViewType, parent.HorizontalMargin, parent.Rotation),
+										password: password);
 
-            if (parent.ZoomType == ZoomType.Fixed)
-                CreateNewItemsSource();
-            else if (parent.ZoomType == ZoomType.FitToHeight)
-                ZoomToHeight();
-            else if (parent.ZoomType == ZoomType.FitToWidth)
-                ZoomToWidth();
+			if (parent.ZoomType == ZoomType.Fixed)
+				CreateNewItemsSource();
+			else if (parent.ZoomType == ZoomType.FitToHeight)
+				ZoomToHeight();
+			else if (parent.ZoomType == ZoomType.FitToWidth)
+				ZoomToWidth();
 
-            if (scrollViewer != null)
-            {
-                scrollViewer.Visibility = Visibility.Visible;
-                scrollViewer.ScrollToTop();
-            }
-        }
+			if (scrollViewer != null)
+			{
+				scrollViewer.Visibility = Visibility.Visible;
+				scrollViewer.ScrollToTop();
+			}
+		}
 
-        public void Unload()
-        {
-            scrollViewer.Visibility = Visibility.Collapsed;
-            scrollViewer.ScrollToHorizontalOffset(0);
-            scrollViewer.ScrollToVerticalOffset(0);
-            imageProvider = null;
+		public void Unload()
+		{
+			scrollViewer.Visibility = Visibility.Collapsed;
+			scrollViewer.ScrollToHorizontalOffset(0);
+			scrollViewer.ScrollToVerticalOffset(0);
+			imageProvider = null;
 
-            if (virtualizingPdfPages != null)
-            {
-                virtualizingPdfPages.CleanUpAllPages();
-                virtualizingPdfPages = null;
-            }
+			if (virtualizingPdfPages != null)
+			{
+				virtualizingPdfPages.CleanUpAllPages();
+				virtualizingPdfPages = null;
+			}
 
-            itemsControl.ItemsSource = null;
-        }
+			itemsControl.ItemsSource = null;
+		}
 
 		private void CreateNewItemsSource()
 		{
 			var pageTimeout = TimeSpan.FromSeconds(2);
 
-			if (virtualizingPdfPages != null)
-				virtualizingPdfPages.CleanUpAllPages();
+            virtualizingPdfPages?.CleanUpAllPages();
 
-			virtualizingPdfPages = new AsyncVirtualizingCollection<IEnumerable<PdfImage>>(imageProvider, parent.GetPagesPerRow(), pageTimeout);
+            virtualizingPdfPages = new AsyncVirtualizingCollection<IEnumerable<PdfImage>>(imageProvider, parent.GetPagesPerRow(), pageTimeout);
 			itemsControl.ItemsSource = virtualizingPdfPages;
 		}
-		
+
 		#region Zoom specific code
 		public float CurrentZoom
 		{
@@ -166,11 +153,11 @@ namespace MoonPdfLib
 
 			virtualPanel.PageRowBounds = parent.PageRowBounds.Select(f => new Size(f.Size.Width * zoomFactor + f.HorizontalOffset, f.Size.Height * zoomFactor + f.VerticalOffset)).ToArray();
 			imageProvider.Settings.ZoomFactor = (float)zoomFactor;
-			
+
 			CreateNewItemsSource();
 
-			scrollViewer.ScrollToHorizontalOffset( (xOffset / zoom) * zoomFactor);
-			scrollViewer.ScrollToVerticalOffset( (yOffset / zoom) * zoomFactor);
+			scrollViewer.ScrollToHorizontalOffset((xOffset / zoom) * zoomFactor);
+			scrollViewer.ScrollToVerticalOffset((yOffset / zoom) * zoomFactor);
 		}
 		#endregion
 
@@ -193,7 +180,7 @@ namespace MoonPdfLib
 		{
 			var nextIndex = PageHelper.GetNextPageIndex(GetCurrentPageIndex(parent.ViewType), parent.TotalPages, parent.ViewType);
 
-			if ( nextIndex == -1 )
+			if (nextIndex == -1)
 				return;
 
 			GotoPage(nextIndex + 1);
@@ -216,7 +203,7 @@ namespace MoonPdfLib
 
 			var pageIndex = virtualPanel.GetItemIndexByVerticalOffset(scrollViewer.VerticalOffset);
 
-			if( pageIndex > 0 )
+			if (pageIndex > 0)
 			{
 				if (viewType == ViewType.Facing)
 					pageIndex *= 2;
@@ -229,6 +216,6 @@ namespace MoonPdfLib
 
 		ScrollViewer IMoonPdfPanel.ScrollViewer => scrollViewer;
 
-        UserControl IMoonPdfPanel.Instance => this;
-    }
+		UserControl IMoonPdfPanel.Instance => this;
+	}
 }

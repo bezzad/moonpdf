@@ -100,16 +100,16 @@ namespace MouseKeyboardActivityMonitor
         /// <summary>
         /// The system tick count of when the event occured.
         /// </summary> 
-        public int Timestamp { get; private set; }
+        public int Timestamp { get; }
         
         /// <summary>
         /// True if event singnals key down..
         /// </summary>
-        public bool IsKeyDown { get; private set; }
+        public bool IsKeyDown { get; }
         
         /// <summary>
         /// True if event singnals key up.
         /// </summary>
-        public bool IsKeyUp { get; private set; }
+        public bool IsKeyUp { get; }
     }
 }

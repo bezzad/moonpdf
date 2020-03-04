@@ -25,33 +25,33 @@ namespace MoonPdf
 {
 	public class Commands
 	{
-		public DelegateCommand OpenCommand { get; private set; }
-		public DelegateCommand ExitCommand { get; private set; }
+		public DelegateCommand OpenCommand { get; }
+		public DelegateCommand ExitCommand { get; }
 
-		public DelegateCommand RotateRightCommand { get; private set; }
-		public DelegateCommand RotateLeftCommand { get; private set; }
+		public DelegateCommand RotateRightCommand { get; }
+		public DelegateCommand RotateLeftCommand { get; }
 
-		public DelegateCommand NextPageCommand { get; private set; }
-		public DelegateCommand PreviousPageCommand { get; private set; }
-		public DelegateCommand FirstPageCommand { get; private set; }
-		public DelegateCommand LastPageCommand { get; private set; }
+		public DelegateCommand NextPageCommand { get; }
+		public DelegateCommand PreviousPageCommand { get; }
+		public DelegateCommand FirstPageCommand { get; }
+		public DelegateCommand LastPageCommand { get; }
 		
-		public DelegateCommand SinglePageCommand { get; private set; }
-		public DelegateCommand FacingCommand { get; private set; }
-		public DelegateCommand BookViewCommand { get; private set; }
+		public DelegateCommand SinglePageCommand { get; }
+		public DelegateCommand FacingCommand { get; }
+		public DelegateCommand BookViewCommand { get; }
 
-		public DelegateCommand TogglePageDisplayCommand { get; private set; }
+		public DelegateCommand TogglePageDisplayCommand { get; }
 
-		public FullscreenCommand FullscreenCommand { get; private set; }
+		public FullscreenCommand FullscreenCommand { get; }
 
-		public DelegateCommand ZoomInCommand { get; private set; }
-		public DelegateCommand ZoomOutCommand { get; private set; }
-		public DelegateCommand FitWidthCommand { get; private set; }
-		public DelegateCommand FitHeightCommand { get; private set; }
-		public DelegateCommand CustomZoomCommand { get; private set; }
+		public DelegateCommand ZoomInCommand { get; }
+		public DelegateCommand ZoomOutCommand { get; }
+		public DelegateCommand FitWidthCommand { get; }
+		public DelegateCommand FitHeightCommand { get; }
+		public DelegateCommand CustomZoomCommand { get; }
 
-		public DelegateCommand ShowAboutCommand { get; private set; }
-		public DelegateCommand GotoPageCommand { get; private set; }
+		public DelegateCommand ShowAboutCommand { get; }
+		public DelegateCommand GotoPageCommand { get; }
 
 		public Commands(MainWindow wnd)
 		{

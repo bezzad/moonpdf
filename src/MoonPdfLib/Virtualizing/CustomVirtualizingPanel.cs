@@ -18,10 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 2013 - Modified version of Paul McClean's code (see AUTHORS file)
  */
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -37,8 +35,8 @@ namespace MoonPdfLib.Virtualizing
 			RenderTransform = _trans;
 		}
 
-        /// <summary>
-        /// the bounds are a combination of all pages from the same row (plus the offset borders, if not ViewType.SinglePage)
+		/// <summary>
+		/// the bounds are a combination of all pages from the same row (plus the offset borders, if not ViewType.SinglePage)
 		/// </summary>
 		public Size[] PageRowBounds { get; set; }
 
@@ -50,13 +48,13 @@ namespace MoonPdfLib.Virtualizing
 			{
 				sum += PageRowBounds[i].Height;
 
-				if( yOffset < sum )
+				if (yOffset < sum)
 					return i;
 			}
 
 			return PageRowBounds.Length - 1;
 		}
-		
+
 		public double GetVerticalOffsetByItemIndex(int itemIndex)
 		{
 			// sum the heights of all previous pages: this is where the current y offset should be
@@ -283,7 +281,7 @@ namespace MoonPdfLib.Virtualizing
 
 		#region IScrollInfo implementation
 		// Paul McClean's comment: See Ben Constable's series of posts at http://blogs.msdn.com/bencon/
-		
+
 		private void UpdateScrollInfo(Size availableSize)
 		{
 			// See how many items there are
@@ -295,50 +293,48 @@ namespace MoonPdfLib.Virtualizing
 			if (extent != _extent)
 			{
 				_extent = extent;
-				if (_owner != null)
-					_owner.InvalidateScrollInfo();
+				_owner?.InvalidateScrollInfo();
 			}
 
 			// Update viewport
 			if (availableSize != _viewport)
 			{
 				_viewport = availableSize;
-				if (_owner != null)
-					_owner.InvalidateScrollInfo();
+				_owner?.InvalidateScrollInfo();
 			}
 		}
 
 		public ScrollViewer ScrollOwner
 		{
 			get => _owner;
-            set => _owner = value;
-        }
+			set => _owner = value;
+		}
 
 		public bool CanHorizontallyScroll
 		{
 			get => _canHScroll;
-            set => _canHScroll = value;
-        }
+			set => _canHScroll = value;
+		}
 
 		public bool CanVerticallyScroll
 		{
 			get => _canVScroll;
-            set => _canVScroll = value;
-        }
+			set => _canVScroll = value;
+		}
 
 		public double HorizontalOffset => _offset.X;
 
-        public double VerticalOffset => _offset.Y;
+		public double VerticalOffset => _offset.Y;
 
-        public double ExtentHeight => _extent.Height;
+		public double ExtentHeight => _extent.Height;
 
-        public double ExtentWidth => _extent.Width;
+		public double ExtentWidth => _extent.Width;
 
-        public double ViewportHeight => _viewport.Height;
+		public double ViewportHeight => _viewport.Height;
 
-        public double ViewportWidth => _viewport.Width;
+		public double ViewportWidth => _viewport.Width;
 
-        private double CalculateVerticalScrollOffset()
+		private double CalculateVerticalScrollOffset()
 		{
 			return ViewportHeight * 0.06;
 		}
@@ -426,8 +422,7 @@ namespace MoonPdfLib.Virtualizing
 
 			_offset.X = offset;
 
-			if (_owner != null)
-				_owner.InvalidateScrollInfo();
+			_owner?.InvalidateScrollInfo();
 
 			_trans.X = -offset;
 
@@ -448,8 +443,7 @@ namespace MoonPdfLib.Virtualizing
 
 			_offset.Y = offset;
 
-			if (_owner != null)
-				_owner.InvalidateScrollInfo();
+			_owner?.InvalidateScrollInfo();
 
 			_trans.Y = -offset;
 

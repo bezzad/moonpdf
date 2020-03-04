@@ -14,15 +14,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 !*/
-/*
- * 2013 - Modified and extended version of Paul McClean's code (see AUTHORS file)
- */
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
 namespace MoonPdfLib.Virtualizing
 {
@@ -87,7 +82,7 @@ namespace MoonPdfLib.Virtualizing
 		/// <value>The items provider.</value>
 		public IItemsProvider<T> ItemsProvider => _itemsProvider;
 
-        #endregion
+		#endregion
 
 		#region PageSize
 
@@ -99,7 +94,7 @@ namespace MoonPdfLib.Virtualizing
 		/// <value>The size of the page.</value>
 		public int PageSize => _pageSize;
 
-        #endregion
+		#endregion
 
 		private readonly TimeSpan _pageTimeout = TimeSpan.Zero;
 
@@ -128,7 +123,7 @@ namespace MoonPdfLib.Virtualizing
 				return _count;
 			}
 			protected set => _count = value;
-        }
+		}
 
 		#endregion
 
@@ -153,7 +148,7 @@ namespace MoonPdfLib.Virtualizing
 				// if accessing upper 50% then request next page
 				if (pageOffset > PageSize / 2 && pageIndex < Count / PageSize)
 					RequestPage(pageIndex + 1);
-				
+
 				// if accessing lower 50% then request prev page
 				if (pageOffset < PageSize / 2 && pageIndex > 0)
 					RequestPage(pageIndex - 1);
@@ -169,13 +164,13 @@ namespace MoonPdfLib.Virtualizing
 				return _pages[pageIndex][pageOffset];
 			}
 			set => throw new NotSupportedException();
-        }
+		}
 
 		object IList.this[int index]
 		{
 			get => this[index];
-            set => throw new NotSupportedException();
-        }
+			set => throw new NotSupportedException();
+		}
 
 		#endregion
 
@@ -398,7 +393,7 @@ namespace MoonPdfLib.Virtualizing
 		/// </returns>
 		public object SyncRoot => this;
 
-        /// <summary>
+		/// <summary>
 		/// Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe).
 		/// </summary>
 		/// <value></value>
@@ -406,7 +401,7 @@ namespace MoonPdfLib.Virtualizing
 		/// </returns>
 		public bool IsSynchronized => false;
 
-        /// <summary>
+		/// <summary>
 		/// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
 		/// </summary>
 		/// <value></value>
@@ -414,7 +409,7 @@ namespace MoonPdfLib.Virtualizing
 		/// </returns>
 		public bool IsReadOnly => true;
 
-        /// <summary>
+		/// <summary>
 		/// Gets a value indicating whether the <see cref="T:System.Collections.IList"/> has a fixed size.
 		/// </summary>
 		/// <value></value>
@@ -422,7 +417,7 @@ namespace MoonPdfLib.Virtualizing
 		/// </returns>
 		public bool IsFixedSize => false;
 
-        #endregion
+		#endregion
 
 		#endregion
 

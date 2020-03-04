@@ -189,9 +189,9 @@ namespace MoonPdfLib.MuPdf
 		{
 			const uint FZ_STORE_DEFAULT = 256 << 20;
 
-			public IntPtr Context { get; private set; }
-			public IntPtr Stream { get; private set; }
-			public IntPtr Document { get; private set; }
+			public IntPtr Context { get; }
+			public IntPtr Stream { get; }
+			public IntPtr Document { get; }
 
 			public PdfFileStream(IPdfSource source)
 			{

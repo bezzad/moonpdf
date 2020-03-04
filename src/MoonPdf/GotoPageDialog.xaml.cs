@@ -32,7 +32,7 @@ namespace MoonPdf
 {
 	public partial class GotoPageDialog : Window
 	{
-		private int MaxPageNumber { get; set; }
+		private int MaxPageNumber { get; }
 		public int? SelectedPageNumber { get; private set; }
 
 		public GotoPageDialog(int currentPageNumber, int maxPageNumber)

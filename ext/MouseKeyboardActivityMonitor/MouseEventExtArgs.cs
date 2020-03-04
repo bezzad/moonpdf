@@ -194,7 +194,6 @@ namespace MouseKeyboardActivityMonitor
         public bool IsMouseKeyDown
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -203,7 +202,6 @@ namespace MouseKeyboardActivityMonitor
         public bool IsMouseKeyUp
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -212,7 +210,6 @@ namespace MouseKeyboardActivityMonitor
         public int Timestamp
         {
             get;
-            private set;
         }
 
         /// <summary>

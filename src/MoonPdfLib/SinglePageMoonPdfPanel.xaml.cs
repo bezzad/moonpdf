@@ -16,19 +16,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 !*/
 using MoonPdfLib.Helper;
 using MoonPdfLib.MuPdf;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MoonPdfLib
 {
@@ -51,46 +41,45 @@ namespace MoonPdfLib
 			scrollViewer = VisualTreeHelperEx.FindChild<ScrollViewer>(this);
 		}
 
-        public void Load(IPdfSource source, string password = null)
-        {
-            scrollViewer = VisualTreeHelperEx.FindChild<ScrollViewer>(this);
-            imageProvider = new PdfImageProvider(source, parent.TotalPages,
-                new PageDisplaySettings(parent.GetPagesPerRow(), parent.ViewType, parent.HorizontalMargin, parent.Rotation), false, password);
+		public void Load(IPdfSource source, string password = null)
+		{
+			scrollViewer = VisualTreeHelperEx.FindChild<ScrollViewer>(this);
+			imageProvider = new PdfImageProvider(source, parent.TotalPages,
+				new PageDisplaySettings(parent.GetPagesPerRow(), parent.ViewType, parent.HorizontalMargin, parent.Rotation), false, password);
 
-            currentPageIndex = 0;
+			currentPageIndex = 0;
 
-            if (scrollViewer != null)
-                scrollViewer.Visibility = Visibility.Visible;
+			if (scrollViewer != null)
+				scrollViewer.Visibility = Visibility.Visible;
 
-            if (parent.ZoomType == ZoomType.Fixed)
-                SetItemsSource();
-            else if (parent.ZoomType == ZoomType.FitToHeight)
-                ZoomToHeight();
-            else if (parent.ZoomType == ZoomType.FitToWidth)
-                ZoomToWidth();
-        }
+			if (parent.ZoomType == ZoomType.Fixed)
+				SetItemsSource();
+			else if (parent.ZoomType == ZoomType.FitToHeight)
+				ZoomToHeight();
+			else if (parent.ZoomType == ZoomType.FitToWidth)
+				ZoomToWidth();
+		}
 
-        public void Unload()
-        {
-            scrollViewer.Visibility = Visibility.Collapsed;
-            scrollViewer.ScrollToHorizontalOffset(0);
-            scrollViewer.ScrollToVerticalOffset(0);
-            currentPageIndex = 0;
+		public void Unload()
+		{
+			scrollViewer.Visibility = Visibility.Collapsed;
+			scrollViewer.ScrollToHorizontalOffset(0);
+			scrollViewer.ScrollToVerticalOffset(0);
+			currentPageIndex = 0;
 
-            imageProvider = null;
-        }
+			imageProvider = null;
+		}
 
 		ScrollViewer IMoonPdfPanel.ScrollViewer => scrollViewer;
 
-        UserControl IMoonPdfPanel.Instance => this;
+		UserControl IMoonPdfPanel.Instance => this;
 
-        void IMoonPdfPanel.GotoPage(int pageNumber)
+		void IMoonPdfPanel.GotoPage(int pageNumber)
 		{
 			currentPageIndex = pageNumber - 1;
 			SetItemsSource();
 
-			if( scrollViewer != null )
-				scrollViewer.ScrollToTop();
+			scrollViewer?.ScrollToTop();
 		}
 
 		void IMoonPdfPanel.GotoPreviousPage()
@@ -104,8 +93,7 @@ namespace MoonPdfLib
 
 			SetItemsSource();
 
-			if (scrollViewer != null)
-				scrollViewer.ScrollToTop();
+			scrollViewer?.ScrollToTop();
 		}
 
 		void IMoonPdfPanel.GotoNextPage()
@@ -119,13 +107,12 @@ namespace MoonPdfLib
 
 			SetItemsSource();
 
-			if( scrollViewer != null )
-				scrollViewer.ScrollToTop();
+			scrollViewer?.ScrollToTop();
 		}
 
 		private void SetItemsSource()
 		{
-			var startIndex = PageHelper.GetVisibleIndexFromPageIndex( currentPageIndex, parent.ViewType);
+			var startIndex = PageHelper.GetVisibleIndexFromPageIndex(currentPageIndex, parent.ViewType);
 			itemsControl.ItemsSource = imageProvider.FetchRange(startIndex, parent.GetPagesPerRow()).FirstOrDefault();
 		}
 
@@ -182,7 +169,7 @@ namespace MoonPdfLib
 
 		public void ZoomOut()
 		{
-			ZoomInternal( CurrentZoom - parent.ZoomStep);
+			ZoomInternal(CurrentZoom - parent.ZoomStep);
 		}
 
 		public void Zoom(double zoomFactor)

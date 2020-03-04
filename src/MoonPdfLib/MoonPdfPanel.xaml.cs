@@ -37,7 +37,6 @@ namespace MoonPdfLib
 		private ZoomType zoomType = ZoomType.Fixed;
 		private IMoonPdfPanel innerPanel;
 		private MoonPdfPanelInputHandler inputHandler;
-		private PageRowBound[] pageRowBounds;
 		private DispatcherTimer resizeTimer;
 
 		#region Dependency properties
@@ -109,7 +108,7 @@ namespace MoonPdfLib
         public IPdfSource CurrentSource { get; private set; }
 		public string CurrentPassword { get; private set; }
 		public int TotalPages { get; private set; }
-		internal PageRowBound[] PageRowBounds => pageRowBounds;
+        internal PageRowBound[] PageRowBounds { get; private set; }
 
         public ZoomType ZoomType
 		{
@@ -120,9 +119,8 @@ namespace MoonPdfLib
 				{
 					zoomType = value;
 
-					if (ZoomTypeChanged != null)
-						ZoomTypeChanged(this, EventArgs.Empty);
-				}
+                    ZoomTypeChanged?.Invoke(this, EventArgs.Empty);
+                }
 			}
 		}
 
@@ -193,9 +191,8 @@ namespace MoonPdfLib
 			CurrentSource = source;
 			CurrentPassword = pw;
 
-			if (PdfLoaded != null)
-				PdfLoaded(this, EventArgs.Empty);
-		}
+            PdfLoaded?.Invoke(this, EventArgs.Empty);
+        }
 
 		public void Unload()
 		{
@@ -205,14 +202,13 @@ namespace MoonPdfLib
 
 			innerPanel.Unload();
 
-			if (PdfLoaded != null)
-				PdfLoaded(this, EventArgs.Empty);
-		}
+            PdfLoaded?.Invoke(this, EventArgs.Empty);
+        }
 
 		private void LoadPdf(IPdfSource source, string password)
 		{
 			var pageBounds = MuPdfWrapper.GetPageBounds(source, Rotation, password);
-			pageRowBounds = CalculatePageRowBounds(pageBounds, ViewType);
+			PageRowBounds = CalculatePageRowBounds(pageBounds, ViewType);
 			TotalPages = pageBounds.Length;
 			innerPanel.Load(source, password);
 		}
@@ -370,9 +366,8 @@ namespace MoonPdfLib
 		{
 			UpdateAndReload(() => { }, oldViewType);
 
-			if (ViewTypeChanged != null)
-				ViewTypeChanged(this, EventArgs.Empty);
-		}
+            ViewTypeChanged?.Invoke(this, EventArgs.Empty);
+        }
 
 		private void ChangeDisplayType(PageRowDisplayType pageRowDisplayType)
 		{
@@ -389,9 +384,8 @@ namespace MoonPdfLib
 					pnlMain.Children.Add(innerPanel.Instance);
 				}, ViewType);
 
-			if (PageRowDisplayChanged != null)
-				PageRowDisplayChanged(this, EventArgs.Empty);
-		}
+            PageRowDisplayChanged?.Invoke(this, EventArgs.Empty);
+        }
 
 		private void UpdateAndReload(Action updateAction, ViewType viewType)
 		{

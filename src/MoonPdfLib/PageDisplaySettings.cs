@@ -14,11 +14,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 !*/
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace MoonPdfLib
 {
 	internal class PageDisplaySettings
@@ -26,13 +21,16 @@ namespace MoonPdfLib
 		public int ImagesPerRow { get; set; }
 		public double HorizontalOffsetBetweenPages { get; set; }
 		public ViewType ViewType { get; set; }
-        public float ZoomFactor { get; set; }
+		public float ZoomFactor { get; set; }
 		public ImageRotation Rotation { get; set; }
 
-		public PageDisplaySettings(int imagesPerRow, ViewType viewType, double horizontalOffsetBetweenPages, ImageRotation rotation = ImageRotation.None, float zoomFactor = 1.0f)
+		public PageDisplaySettings(int imagesPerRow, ViewType viewType, 
+            double horizontalOffsetBetweenPages, 
+            ImageRotation rotation = ImageRotation.None, 
+            float zoomFactor = 1.0f)
 		{
 			ImagesPerRow = imagesPerRow;
-            ZoomFactor = zoomFactor;
+			ZoomFactor = zoomFactor;
 			ViewType = viewType;
 			HorizontalOffsetBetweenPages = viewType == ViewType.SinglePage ? 0 : horizontalOffsetBetweenPages;
 			Rotation = rotation;

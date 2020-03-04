@@ -38,8 +38,8 @@ namespace MoonPdf
 			{Key.Subtract, "-"}
 		};
 
-		public string Name { get; private set; }
-		public string GestureText { get; private set; }
+		public string Name { get; }
+		public string GestureText { get; }
 		public InputBinding InputBinding { get; set; }
 
 		protected BaseCommand(string name, InputGesture inputGesture)

@@ -18,7 +18,7 @@ namespace MoonPdfLib.MuPdf
 {
     public class MemorySource : IPdfSource
     {
-        public byte[] Bytes { get; private set; }
+        public byte[] Bytes { get; }
 
         public MemorySource(byte[] bytes)
         {

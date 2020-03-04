@@ -199,21 +199,15 @@ namespace MouseKeyboardActivityMonitor
 		}
 
 		private void InvokeMouseEventHandler(MouseEventHandler handler, MouseEventArgs e)
-		{
-			if (handler != null)
-			{
-				handler(this, e);
-			}
-		}
+        {
+            handler?.Invoke(this, e);
+        }
 
 
 		private void InvokeMouseEventHandlerExt(EventHandler<MouseEventExtArgs> handler, MouseEventExtArgs e)
-		{
-			if (handler != null)
-			{
-				handler(this, e);
-			}
-		}
+        {
+            handler?.Invoke(this, e);
+        }
 
 		/// <summary>
 		/// Occurs when the mouse pointer is moved.

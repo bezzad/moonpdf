@@ -19,7 +19,7 @@ namespace MoonPdf
 {
 	public class MainWindowDataContext
 	{
-		public Commands Commands { get; private set; }
+		public Commands Commands { get; }
 
 		public MainWindowDataContext(MainWindow wnd)
 		{

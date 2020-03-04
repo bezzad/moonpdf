@@ -18,7 +18,7 @@ namespace MoonPdfLib.MuPdf
 {
     public class FileSource : IPdfSource
     {
-        public string Filename { get; private set; }
+        public string Filename { get; }
 
         public FileSource(string filename)
         {
