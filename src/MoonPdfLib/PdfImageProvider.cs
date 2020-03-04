@@ -38,7 +38,7 @@ namespace MoonPdfLib
 		{
 			this.pdfSource = pdfSource;
 			this.totalPages = totalPages;
-			this.Settings = settings;
+			Settings = settings;
 			this.preFetch = preFetch; // preFetch is relevant for continuous page display
 			this.password = password;
 		}
@@ -46,15 +46,15 @@ namespace MoonPdfLib
 		public int FetchCount()
 		{
 			if (count == -1)
-				count = MuPdfWrapper.CountPages(pdfSource, this.password);
+				count = MuPdfWrapper.CountPages(pdfSource, password);
 
 			return count;
 		}
 
 		public IList<IEnumerable<PdfImage>> FetchRange(int startIndex, int count)
 		{
-			var imagesPerRow = this.Settings.ImagesPerRow;
-			var viewType = this.Settings.ViewType;
+			var imagesPerRow = Settings.ImagesPerRow;
+			var viewType = Settings.ViewType;
 
 			startIndex = (startIndex * imagesPerRow) + 1;
 
@@ -64,7 +64,7 @@ namespace MoonPdfLib
 			if (viewType == ViewType.BookView)
 			{
 				if (startIndex == 1)
-					count = Math.Min(this.totalPages, preFetch ? (1 /*first page*/ + imagesPerRow) : 0);
+					count = Math.Min(totalPages, preFetch ? (1 /*first page*/ + imagesPerRow) : 0);
 				else
 					startIndex--;
 			}
@@ -76,9 +76,9 @@ namespace MoonPdfLib
 
 			for (var i = Math.Min(FetchCount(), startIndex); i <= Math.Min(FetchCount(), Math.Max(startIndex, end)); i++)
 			{
-				var margin = new Thickness(0, 0, this.Settings.HorizontalOffsetBetweenPages, 0);
+				var margin = new Thickness(0, 0, Settings.HorizontalOffsetBetweenPages, 0);
 
-				using (var bmp = MuPdfWrapper.ExtractPage(pdfSource, i, this.Settings.ZoomFactor, this.password))
+				using (var bmp = MuPdfWrapper.ExtractPage(pdfSource, i, Settings.ZoomFactor, password))
 				{
 					if (Settings.Rotation != ImageRotation.None)
 					{

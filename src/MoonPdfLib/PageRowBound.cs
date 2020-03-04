@@ -30,11 +30,11 @@ namespace MoonPdfLib
 
 		public PageRowBound(Size size, double verticalOffset, double horizontalOffset)
 		{
-			this.Size = size;
-			this.VerticalOffset = verticalOffset;
-			this.HorizontalOffset = horizontalOffset;
+			Size = size;
+			VerticalOffset = verticalOffset;
+			HorizontalOffset = horizontalOffset;
 		}
 
-		public Size SizeIncludingOffset => new Size(this.Size.Width + this.HorizontalOffset, this.Size.Height + this.VerticalOffset);
+		public Size SizeIncludingOffset => new Size(Size.Width + HorizontalOffset, Size.Height + VerticalOffset);
     }
 }

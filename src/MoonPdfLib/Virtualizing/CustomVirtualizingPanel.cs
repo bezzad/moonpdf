@@ -34,7 +34,7 @@ namespace MoonPdfLib.Virtualizing
 		public CustomVirtualizingPanel()
 		{
 			// For use in the IScrollInfo implementation
-			this.RenderTransform = _trans;
+			RenderTransform = _trans;
 		}
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace MoonPdfLib.Virtualizing
 		/// </summary>
 		/// <param name="availableSize">Size available</param>
 		/// <returns>Size desired</returns>
-		protected override System.Windows.Size MeasureOverride(System.Windows.Size availableSize)
+		protected override Size MeasureOverride(Size availableSize)
 		{
 			UpdateScrollInfo(availableSize);
 
@@ -83,8 +83,8 @@ namespace MoonPdfLib.Virtualizing
 				return availableSize;
 
 			// We need to access InternalChildren before the generator to work around a bug
-			var children = this.InternalChildren;
-			var generator = this.ItemContainerGenerator;
+			var children = InternalChildren;
+			var generator = ItemContainerGenerator;
 
 			// Get the generator position of the first visible data item
 			var startPos = generator.GeneratorPositionFromIndex(firstVisibleItemIndex);
@@ -107,11 +107,11 @@ namespace MoonPdfLib.Virtualizing
 						// Figure out if we need to insert the child at the end or somewhere in the middle
 						if (childIndex >= children.Count)
 						{
-							base.AddInternalChild(child);
+							AddInternalChild(child);
 						}
 						else
 						{
-							base.InsertInternalChild(childIndex, child);
+							InsertInternalChild(childIndex, child);
 						}
 						generator.PrepareItemContainer(child);
 					}
@@ -137,15 +137,15 @@ namespace MoonPdfLib.Virtualizing
 		/// </summary>
 		/// <param name="finalSize">Size available</param>
 		/// <returns>Size used</returns>
-		protected override System.Windows.Size ArrangeOverride(System.Windows.Size finalSize)
+		protected override Size ArrangeOverride(Size finalSize)
 		{
-			var generator = this.ItemContainerGenerator;
+			var generator = ItemContainerGenerator;
 
 			UpdateScrollInfo(finalSize);
 
-			for (var i = 0; i < this.Children.Count; i++)
+			for (var i = 0; i < Children.Count; i++)
 			{
-				var child = this.Children[i];
+				var child = Children[i];
 
 				// Map the child offset to an item offset
 				var itemIndex = generator.IndexFromGeneratorPosition(new GeneratorPosition(i, 0));
@@ -163,8 +163,8 @@ namespace MoonPdfLib.Virtualizing
 		/// <param name="maxDesiredGenerated">last item index that should be visible</param>
 		private void CleanUpItems(int minDesiredGenerated, int maxDesiredGenerated)
 		{
-			var children = this.InternalChildren;
-			var generator = this.ItemContainerGenerator;
+			var children = InternalChildren;
+			var generator = ItemContainerGenerator;
 
 			for (var i = children.Count - 1; i >= 0; i--)
 			{
@@ -189,7 +189,7 @@ namespace MoonPdfLib.Virtualizing
 		/// <param name="availableSize">available size</param>
 		/// <param name="itemCount">number of data items</param>
 		/// <returns></returns>
-		private System.Windows.Size CalculateExtent(System.Windows.Size availableSize, int itemCount)
+		private Size CalculateExtent(Size availableSize, int itemCount)
 		{
 			if (PageRowBounds == null || PageRowBounds.Length == 0)
 				return new Size(availableSize.Width, _extent.Height);
@@ -261,7 +261,7 @@ namespace MoonPdfLib.Virtualizing
 			if (sizeInfo.WidthChanged && sizeInfo.NewSize.Width > sizeInfo.PreviousSize.Width) // only necessary when width was increased
 			{
 				var widthOffset = sizeInfo.NewSize.Width - sizeInfo.PreviousSize.Width;
-				this.ScrollOwner.ScrollToHorizontalOffset(this.ScrollOwner.HorizontalOffset - widthOffset);
+				ScrollOwner.ScrollToHorizontalOffset(ScrollOwner.HorizontalOffset - widthOffset);
 			}
 		}
 
@@ -271,7 +271,7 @@ namespace MoonPdfLib.Virtualizing
 		/// <param name="itemIndex">The data item index of the child</param>
 		/// <param name="child">The element to position</param>
 		/// <param name="finalSize">The size of the panel</param>
-		private void ArrangeChild(int itemIndex, UIElement child, System.Windows.Size finalSize)
+		private void ArrangeChild(int itemIndex, UIElement child, Size finalSize)
 		{
 			var size = PageRowBounds[itemIndex];
 			var x = Math.Max(0, (finalSize.Width / 2) - (size.Width / 2)); // used to center the content horizontally
@@ -350,42 +350,42 @@ namespace MoonPdfLib.Virtualizing
 
 		public void LineUp()
 		{
-			SetVerticalOffset(this.VerticalOffset - CalculateVerticalScrollOffset());
+			SetVerticalOffset(VerticalOffset - CalculateVerticalScrollOffset());
 		}
 
 		public void LineDown()
 		{
-			SetVerticalOffset(this.VerticalOffset + CalculateVerticalScrollOffset());
+			SetVerticalOffset(VerticalOffset + CalculateVerticalScrollOffset());
 		}
 
 		public void PageUp()
 		{
-			SetVerticalOffset(this.VerticalOffset - _viewport.Height);
+			SetVerticalOffset(VerticalOffset - _viewport.Height);
 		}
 
 		public void PageDown()
 		{
-			SetVerticalOffset(this.VerticalOffset + _viewport.Height);
+			SetVerticalOffset(VerticalOffset + _viewport.Height);
 		}
 
 		public void MouseWheelUp()
 		{
-			SetVerticalOffset(this.VerticalOffset - (3 * CalculateVerticalScrollOffset()));
+			SetVerticalOffset(VerticalOffset - (3 * CalculateVerticalScrollOffset()));
 		}
 
 		public void MouseWheelDown()
 		{
-			SetVerticalOffset(this.VerticalOffset + (3 * CalculateVerticalScrollOffset()));
+			SetVerticalOffset(VerticalOffset + (3 * CalculateVerticalScrollOffset()));
 		}
 
 		public void LineLeft()
 		{
-			SetHorizontalOffset(this.HorizontalOffset - CalculateHorizontalScrollOffset());
+			SetHorizontalOffset(HorizontalOffset - CalculateHorizontalScrollOffset());
 		}
 
 		public void LineRight()
 		{
-			SetHorizontalOffset(this.HorizontalOffset + CalculateHorizontalScrollOffset());
+			SetHorizontalOffset(HorizontalOffset + CalculateHorizontalScrollOffset());
 		}
 
 		public Rect MakeVisible(Visual visual, Rect rectangle)
@@ -395,22 +395,22 @@ namespace MoonPdfLib.Virtualizing
 
 		public void MouseWheelLeft()
 		{
-			this.LineLeft();
+			LineLeft();
 		}
 
 		public void MouseWheelRight()
 		{
-			this.LineRight();
+			LineRight();
 		}
 
 		public void PageLeft()
 		{
-			SetHorizontalOffset(this.HorizontalOffset - _viewport.Width);
+			SetHorizontalOffset(HorizontalOffset - _viewport.Width);
 		}
 
 		public void PageRight()
 		{
-			SetHorizontalOffset(this.HorizontalOffset + _viewport.Width);
+			SetHorizontalOffset(HorizontalOffset + _viewport.Width);
 		}
 
 		public void SetHorizontalOffset(double offset)

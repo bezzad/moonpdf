@@ -40,16 +40,16 @@ namespace MoonPdf
 		private static string appName;
 		private MainWindowDataContext dataContext;
 
-		internal MoonPdfPanel MoonPdfPanel => this.moonPdfPanel;
+		internal MoonPdfPanel MoonPdfPanel => moonPdfPanel;
 
         public MainWindow()
 		{
 			InitializeComponent();
 
-			this.dataContext = new MainWindowDataContext(this);
-			this.Icon = MoonPdf.Resources.moon.ToBitmapSource();
-			this.DataContext = dataContext;
-			this.UpdateTitle();
+			dataContext = new MainWindowDataContext(this);
+			Icon = MoonPdf.Resources.moon.ToBitmapSource();
+			DataContext = dataContext;
+			UpdateTitle();
 
 			moonPdfPanel.ViewTypeChanged += moonPdfPanel_ViewTypeChanged;
 			moonPdfPanel.ZoomTypeChanged += moonPdfPanel_ZoomTypeChanged;
@@ -57,11 +57,11 @@ namespace MoonPdf
 			moonPdfPanel.PdfLoaded += moonPdfPanel_PdfLoaded;
             moonPdfPanel.PasswordRequired += moonPdfPanel_PasswordRequired;
 
-			this.UpdatePageDisplayMenuItem();
-			this.UpdateZoomMenuItems();
-			this.UpdateViewTypeItems();
+			UpdatePageDisplayMenuItem();
+			UpdateZoomMenuItems();
+			UpdateViewTypeItems();
 
-			this.Loaded += MainWindow_Loaded;
+			Loaded += MainWindow_Loaded;
 		}
 
         void moonPdfPanel_PasswordRequired(object sender, PasswordRequiredEventArgs e)
@@ -83,7 +83,7 @@ namespace MoonPdf
             {
                 try
                 {
-                    this.moonPdfPanel.OpenFile(args[1]);
+                    moonPdfPanel.OpenFile(args[1]);
                 }
                 catch (Exception ex)
                 {
@@ -94,43 +94,43 @@ namespace MoonPdf
 
 		void moonPdfPanel_PageDisplayChanged(object sender, EventArgs e)
 		{
-			this.UpdatePageDisplayMenuItem();
+			UpdatePageDisplayMenuItem();
 		}
 
 		private void UpdatePageDisplayMenuItem()
 		{
-			this.itmContinuously.IsChecked = (this.moonPdfPanel.PageRowDisplay == MoonPdfLib.PageRowDisplayType.ContinuousPageRows);
+			itmContinuously.IsChecked = (moonPdfPanel.PageRowDisplay == PageRowDisplayType.ContinuousPageRows);
 		}
 
 		void moonPdfPanel_ZoomTypeChanged(object sender, EventArgs e)
 		{
-			this.UpdateZoomMenuItems();
+			UpdateZoomMenuItems();
 		}
 
 		private void UpdateZoomMenuItems()
 		{
-			this.itmFitHeight.IsChecked = moonPdfPanel.ZoomType == ZoomType.FitToHeight;
-			this.itmFitWidth.IsChecked = moonPdfPanel.ZoomType == ZoomType.FitToWidth;
-			this.itmCustomZoom.IsChecked = moonPdfPanel.ZoomType == ZoomType.Fixed;
+			itmFitHeight.IsChecked = moonPdfPanel.ZoomType == ZoomType.FitToHeight;
+			itmFitWidth.IsChecked = moonPdfPanel.ZoomType == ZoomType.FitToWidth;
+			itmCustomZoom.IsChecked = moonPdfPanel.ZoomType == ZoomType.Fixed;
 		}
 
 		void moonPdfPanel_ViewTypeChanged(object sender, EventArgs e)
 		{
-			this.UpdateViewTypeItems();
+			UpdateViewTypeItems();
 		}
 
 		private void UpdateViewTypeItems()
 		{
-			switch (this.moonPdfPanel.ViewType)
+			switch (moonPdfPanel.ViewType)
 			{
-				case MoonPdfLib.ViewType.SinglePage:
-					this.viewSingle.IsChecked = true;
+				case ViewType.SinglePage:
+					viewSingle.IsChecked = true;
 					break;
-				case MoonPdfLib.ViewType.Facing:
-					this.viewFacing.IsChecked = true;
+				case ViewType.Facing:
+					viewFacing.IsChecked = true;
 					break;
-				case MoonPdfLib.ViewType.BookView:
-					this.viewBook.IsChecked = true;
+				case ViewType.BookView:
+					viewBook.IsChecked = true;
 					break;
 				default:
 					break;
@@ -139,7 +139,7 @@ namespace MoonPdf
 
 		void moonPdfPanel_PdfLoaded(object sender, EventArgs e)
 		{
-			this.UpdateTitle();
+			UpdateTitle();
 		}
 
 		private void UpdateTitle()
@@ -153,12 +153,12 @@ namespace MoonPdf
 
                 if( fs != null )
                 {
-                    this.Title = string.Format("{0} - {1}", System.IO.Path.GetFileName(fs.Filename), appName);
+                    Title = string.Format("{0} - {1}", System.IO.Path.GetFileName(fs.Filename), appName);
                     return;
                 }
             }
             
-			this.Title = appName;
+			Title = appName;
 		}
 
 		internal bool IsPdfLoaded()
@@ -172,16 +172,16 @@ namespace MoonPdf
 			
 			if (e.SystemKey == Key.LeftAlt)
 			{
-				this.mainMenu.Visibility = (this.mainMenu.Visibility == System.Windows.Visibility.Collapsed ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed);
+				mainMenu.Visibility = (mainMenu.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed);
 
-				if (this.mainMenu.Visibility == System.Windows.Visibility.Collapsed)
+				if (mainMenu.Visibility == Visibility.Collapsed)
 					e.Handled = true;
 			}
 		}
 
 		internal void OnFullscreenChanged(bool isFullscreen)
 		{
-			this.itmFullscreen.IsChecked = isFullscreen;
+			itmFullscreen.IsChecked = isFullscreen;
 		}
 	}
 }

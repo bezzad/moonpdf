@@ -36,25 +36,25 @@ namespace MoonPdf
         public PdfPasswordDialog()
         {
             InitializeComponent();
-            this.Loaded += PdfPasswordDialog_Loaded;
+            Loaded += PdfPasswordDialog_Loaded;
         }
 
         void PdfPasswordDialog_Loaded(object sender, RoutedEventArgs e)
         {
-            this.txtPassword.Focus();
-            this.txtPassword.SelectAll();
+            txtPassword.Focus();
+            txtPassword.SelectAll();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Password = this.txtPassword.Password;
-            this.DialogResult = true;
-            this.Close();
+            Password = txtPassword.Password;
+            DialogResult = true;
+            Close();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

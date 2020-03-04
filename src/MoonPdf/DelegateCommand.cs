@@ -36,12 +36,12 @@ namespace MoonPdf
 
 		public override bool CanExecute(object parameter)
 		{
-			return this.canExecuteFunc != null ? this.canExecuteFunc(parameter) : true;
+			return canExecuteFunc != null ? canExecuteFunc(parameter) : true;
 		}
 
 		public override void Execute(object parameter)
 		{
-			this.executeAction(parameter);
+			executeAction(parameter);
 		}
 	}
 }

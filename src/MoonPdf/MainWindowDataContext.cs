@@ -27,7 +27,7 @@ namespace MoonPdf
 
 		public MainWindowDataContext(MainWindow wnd)
 		{
-			this.Commands = new Commands(wnd);
+			Commands = new Commands(wnd);
 		}
 	}
 }

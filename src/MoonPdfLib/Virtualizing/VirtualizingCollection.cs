@@ -153,7 +153,7 @@ namespace MoonPdfLib.Virtualizing
 				// if accessing upper 50% then request next page
 				if (pageOffset > PageSize / 2 && pageIndex < Count / PageSize)
 					RequestPage(pageIndex + 1);
-
+				
 				// if accessing lower 50% then request prev page
 				if (pageOffset < PageSize / 2 && pageIndex > 0)
 					RequestPage(pageIndex - 1);

@@ -108,8 +108,8 @@ namespace MouseKeyboardActivityMonitor.WinApi
         public MouseStruct ToMouseStruct()
         {
             var tmp = new MouseStruct();
-            tmp.Point = this.Point;
-            tmp.MouseData = this.MouseData;
+            tmp.Point = Point;
+            tmp.MouseData = MouseData;
             tmp.Timestamp = Environment.TickCount;
             return tmp;
         }

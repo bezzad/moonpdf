@@ -58,7 +58,7 @@ namespace MoonPdf
 			var pdfPanel = wnd.MoonPdfPanel;
 			Predicate<object> isPdfLoaded = f => wnd.IsPdfLoaded(); // used for the CanExecute callback
 
-			this.OpenCommand = new DelegateCommand("Open...", f =>
+			OpenCommand = new DelegateCommand("Open...", f =>
 				{
 					var dlg = new Microsoft.Win32.OpenFileDialog { Title = "Select PDF file...", DefaultExt = ".pdf", Filter = "PDF file (.pdf)|*.pdf",CheckFileExists = true };
 
@@ -75,13 +75,13 @@ namespace MoonPdf
                     }
 				}, f => true, new KeyGesture(Key.O, ModifierKeys.Control));
 
-			this.ExitCommand = new DelegateCommand("Exit", f => wnd.Close(), f => true, new KeyGesture(Key.Q, ModifierKeys.Control));
+			ExitCommand = new DelegateCommand("Exit", f => wnd.Close(), f => true, new KeyGesture(Key.Q, ModifierKeys.Control));
 
-			this.PreviousPageCommand = new DelegateCommand("Previous page", f => pdfPanel.GotoPreviousPage(), isPdfLoaded, new KeyGesture(Key.Left));
-			this.NextPageCommand = new DelegateCommand("Next page", f => pdfPanel.GotoNextPage(), isPdfLoaded, new KeyGesture(Key.Right));
-			this.FirstPageCommand = new DelegateCommand("First page", f => pdfPanel.GotoFirstPage(), isPdfLoaded, new KeyGesture(Key.Home));
-			this.LastPageCommand = new DelegateCommand("Last page", f => pdfPanel.GotoLastPage(), isPdfLoaded, new KeyGesture(Key.End));
-			this.GotoPageCommand = new DelegateCommand("Goto page...", f =>
+			PreviousPageCommand = new DelegateCommand("Previous page", f => pdfPanel.GotoPreviousPage(), isPdfLoaded, new KeyGesture(Key.Left));
+			NextPageCommand = new DelegateCommand("Next page", f => pdfPanel.GotoNextPage(), isPdfLoaded, new KeyGesture(Key.Right));
+			FirstPageCommand = new DelegateCommand("First page", f => pdfPanel.GotoFirstPage(), isPdfLoaded, new KeyGesture(Key.Home));
+			LastPageCommand = new DelegateCommand("Last page", f => pdfPanel.GotoLastPage(), isPdfLoaded, new KeyGesture(Key.End));
+			GotoPageCommand = new DelegateCommand("Goto page...", f =>
 			{
 				var dlg = new GotoPageDialog(pdfPanel.GetCurrentPageNumber(), pdfPanel.TotalPages);
 
@@ -89,27 +89,27 @@ namespace MoonPdf
 					pdfPanel.GotoPage(dlg.SelectedPageNumber.Value);
 			}, isPdfLoaded, new KeyGesture(Key.G, ModifierKeys.Control));
 
-			this.RotateRightCommand = new DelegateCommand("Rotate right", f => pdfPanel.RotateRight(), isPdfLoaded, new KeyGesture(Key.Add, ModifierKeys.Control | ModifierKeys.Shift));
-			this.RotateLeftCommand = new DelegateCommand("Rotate left", f => pdfPanel.RotateLeft(), isPdfLoaded, new KeyGesture(Key.Subtract, ModifierKeys.Control | ModifierKeys.Shift));
+			RotateRightCommand = new DelegateCommand("Rotate right", f => pdfPanel.RotateRight(), isPdfLoaded, new KeyGesture(Key.Add, ModifierKeys.Control | ModifierKeys.Shift));
+			RotateLeftCommand = new DelegateCommand("Rotate left", f => pdfPanel.RotateLeft(), isPdfLoaded, new KeyGesture(Key.Subtract, ModifierKeys.Control | ModifierKeys.Shift));
 
-			this.ZoomInCommand = new DelegateCommand("Zoom in", f => pdfPanel.ZoomIn(), isPdfLoaded, new KeyGesture(Key.Add));
-			this.ZoomOutCommand = new DelegateCommand("Zoom out", f => pdfPanel.ZoomOut(), isPdfLoaded, new KeyGesture(Key.Subtract));
+			ZoomInCommand = new DelegateCommand("Zoom in", f => pdfPanel.ZoomIn(), isPdfLoaded, new KeyGesture(Key.Add));
+			ZoomOutCommand = new DelegateCommand("Zoom out", f => pdfPanel.ZoomOut(), isPdfLoaded, new KeyGesture(Key.Subtract));
 
-			this.FitWidthCommand = new DelegateCommand("Fit width", f => pdfPanel.ZoomToWidth(), isPdfLoaded, new KeyGesture(Key.D4, ModifierKeys.Control));
-			this.FitHeightCommand = new DelegateCommand("Fit height", f => pdfPanel.ZoomToHeight(), isPdfLoaded, new KeyGesture(Key.D5, ModifierKeys.Control));
-			this.CustomZoomCommand = new DelegateCommand("Custom zoom", f => pdfPanel.SetFixedZoom(), isPdfLoaded, new KeyGesture(Key.D6, ModifierKeys.Control));
+			FitWidthCommand = new DelegateCommand("Fit width", f => pdfPanel.ZoomToWidth(), isPdfLoaded, new KeyGesture(Key.D4, ModifierKeys.Control));
+			FitHeightCommand = new DelegateCommand("Fit height", f => pdfPanel.ZoomToHeight(), isPdfLoaded, new KeyGesture(Key.D5, ModifierKeys.Control));
+			CustomZoomCommand = new DelegateCommand("Custom zoom", f => pdfPanel.SetFixedZoom(), isPdfLoaded, new KeyGesture(Key.D6, ModifierKeys.Control));
 
-			this.TogglePageDisplayCommand = new DelegateCommand("Show pages continuously", f => pdfPanel.TogglePageDisplay(), isPdfLoaded, new KeyGesture(Key.D7, ModifierKeys.Control));
+			TogglePageDisplayCommand = new DelegateCommand("Show pages continuously", f => pdfPanel.TogglePageDisplay(), isPdfLoaded, new KeyGesture(Key.D7, ModifierKeys.Control));
 
-			this.FullscreenCommand = new FullscreenCommand("Full screen", wnd, new KeyGesture(Key.L, ModifierKeys.Control));
+			FullscreenCommand = new FullscreenCommand("Full screen", wnd, new KeyGesture(Key.L, ModifierKeys.Control));
 
-			this.SinglePageCommand = new DelegateCommand("Single page", f => { pdfPanel.ViewType = MoonPdfLib.ViewType.SinglePage; }, isPdfLoaded, new KeyGesture(Key.D1, ModifierKeys.Control));
-			this.FacingCommand = new DelegateCommand("Facing", f => { pdfPanel.ViewType = MoonPdfLib.ViewType.Facing; }, isPdfLoaded, new KeyGesture(Key.D2, ModifierKeys.Control));
-			this.BookViewCommand = new DelegateCommand("Book view", f => { pdfPanel.ViewType = MoonPdfLib.ViewType.BookView; }, isPdfLoaded, new KeyGesture(Key.D3, ModifierKeys.Control));
+			SinglePageCommand = new DelegateCommand("Single page", f => { pdfPanel.ViewType = MoonPdfLib.ViewType.SinglePage; }, isPdfLoaded, new KeyGesture(Key.D1, ModifierKeys.Control));
+			FacingCommand = new DelegateCommand("Facing", f => { pdfPanel.ViewType = MoonPdfLib.ViewType.Facing; }, isPdfLoaded, new KeyGesture(Key.D2, ModifierKeys.Control));
+			BookViewCommand = new DelegateCommand("Book view", f => { pdfPanel.ViewType = MoonPdfLib.ViewType.BookView; }, isPdfLoaded, new KeyGesture(Key.D3, ModifierKeys.Control));
 
-			this.ShowAboutCommand = new DelegateCommand("About", f => new AboutWindow().ShowDialog(), f => true, null);
+			ShowAboutCommand = new DelegateCommand("About", f => new AboutWindow().ShowDialog(), f => true, null);
 
-			this.RegisterInputBindings(wnd);
+			RegisterInputBindings(wnd);
 		}
 
 		private void RegisterInputBindings(MainWindow wnd)

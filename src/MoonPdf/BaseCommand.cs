@@ -46,18 +46,18 @@ namespace MoonPdf
 
 		protected BaseCommand(string name, InputGesture inputGesture)
 		{
-			this.Name = name;
+			Name = name;
 
 			if (inputGesture != null)
 			{
-				this.InputBinding = new System.Windows.Input.InputBinding(this, inputGesture);
+				InputBinding = new InputBinding(this, inputGesture);
 
 				if (inputGesture is KeyGesture)
 				{
 					var kg = (KeyGesture)inputGesture;
 					var keyText = keyReplacements.ContainsKey(kg.Key) ? keyReplacements[kg.Key] : kg.Key.ToString();
 
-					this.GestureText = modifierText[kg.Modifiers] + keyText;
+					GestureText = modifierText[kg.Modifiers] + keyText;
 				}
 			}
 		}
