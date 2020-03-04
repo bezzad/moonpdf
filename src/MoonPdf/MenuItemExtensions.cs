@@ -17,10 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /*
  * 2013 - Modified version of Patrick's work (see AUTHORS file)
  */
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -28,20 +25,20 @@ namespace MoonPdf
 {
 	public class MenuItemExtensions : DependencyObject
 	{
-		public static Dictionary<MenuItem, String> ElementToGroupNames = new Dictionary<MenuItem, String>();
+		public static Dictionary<MenuItem, string> ElementToGroupNames = new Dictionary<MenuItem, string>();
 
 		public static readonly DependencyProperty GroupNameProperty =
 			DependencyProperty.RegisterAttached("GroupName",
-										 typeof(String),
+										 typeof(string),
 										 typeof(MenuItemExtensions),
-										 new PropertyMetadata(String.Empty, OnGroupNameChanged));
+										 new PropertyMetadata(string.Empty, OnGroupNameChanged));
 
-		public static void SetGroupName(MenuItem element, String value)
+		public static void SetGroupName(MenuItem element, string value)
 		{
 			element.SetValue(GroupNameProperty, value);
 		}
 
-		public static String GetGroupName(MenuItem element)
+		public static string GetGroupName(MenuItem element)
 		{
 			return element.GetValue(GroupNameProperty).ToString();
 		}
@@ -49,13 +46,12 @@ namespace MoonPdf
 		private static void OnGroupNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			//Add an entry to the group name collection
-			var menuItem = d as MenuItem;
 
-			if (menuItem != null)
+            if (d is MenuItem menuItem)
 			{
 				var newGroupName = e.NewValue.ToString();
 				var oldGroupName = e.OldValue.ToString();
-				if (String.IsNullOrEmpty(newGroupName))
+				if (string.IsNullOrEmpty(newGroupName))
 				{
 					//Removing the toggle button from grouping
 					RemoveCheckboxFromGrouping(menuItem);
@@ -65,7 +61,7 @@ namespace MoonPdf
 					//Switching to a new group
 					if (newGroupName != oldGroupName)
 					{
-						if (!String.IsNullOrEmpty(oldGroupName))
+						if (!string.IsNullOrEmpty(oldGroupName))
 						{
 							//Remove the old group mapping
 							RemoveCheckboxFromGrouping(menuItem);

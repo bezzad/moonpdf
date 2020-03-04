@@ -16,8 +16,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 !*/
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 
 namespace MoonPdf
@@ -52,11 +50,9 @@ namespace MoonPdf
 			{
 				InputBinding = new InputBinding(this, inputGesture);
 
-				if (inputGesture is KeyGesture)
+				if (inputGesture is KeyGesture kg)
 				{
-					var kg = (KeyGesture)inputGesture;
-					var keyText = keyReplacements.ContainsKey(kg.Key) ? keyReplacements[kg.Key] : kg.Key.ToString();
-
+                    var keyText = keyReplacements.ContainsKey(kg.Key) ? keyReplacements[kg.Key] : kg.Key.ToString();
 					GestureText = modifierText[kg.Modifiers] + keyText;
 				}
 			}
@@ -68,7 +64,7 @@ namespace MoonPdf
 		public event EventHandler CanExecuteChanged
 		{
 			add => CommandManager.RequerySuggested += value;
-            remove => CommandManager.RequerySuggested -= value;
-        }
+			remove => CommandManager.RequerySuggested -= value;
+		}
 	}
 }

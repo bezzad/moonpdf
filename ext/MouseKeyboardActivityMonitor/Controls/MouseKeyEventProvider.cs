@@ -117,9 +117,7 @@ namespace MouseKeyboardActivityMonitor.Controls
             object sender = this;
             foreach (var d in inputEvent.GetInvocationList())
             {
-                var syncer = d.Target as ISynchronizeInvoke;
-
-                if (syncer == null)
+                if (!(d.Target is ISynchronizeInvoke syncer))
                 {
                     d.DynamicInvoke(new[] { sender, e });
                 }

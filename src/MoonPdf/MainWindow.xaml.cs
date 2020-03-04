@@ -14,24 +14,14 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 !*/
+using MoonPdfLib;
+using MoonPdfLib.MuPdf;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MoonPdfLib;
-using MoonPdfLib.Helper;
-using MoonPdfLib.MuPdf;
 
 namespace MoonPdf
 {
@@ -42,7 +32,7 @@ namespace MoonPdf
 
 		internal MoonPdfPanel MoonPdfPanel => moonPdfPanel;
 
-        public MainWindow()
+		public MainWindow()
 		{
 			InitializeComponent();
 
@@ -55,7 +45,7 @@ namespace MoonPdf
 			moonPdfPanel.ZoomTypeChanged += moonPdfPanel_ZoomTypeChanged;
 			moonPdfPanel.PageRowDisplayChanged += moonPdfPanel_PageDisplayChanged;
 			moonPdfPanel.PdfLoaded += moonPdfPanel_PdfLoaded;
-            moonPdfPanel.PasswordRequired += moonPdfPanel_PasswordRequired;
+			moonPdfPanel.PasswordRequired += moonPdfPanel_PasswordRequired;
 
 			UpdatePageDisplayMenuItem();
 			UpdateZoomMenuItems();
@@ -64,32 +54,32 @@ namespace MoonPdf
 			Loaded += MainWindow_Loaded;
 		}
 
-        void moonPdfPanel_PasswordRequired(object sender, PasswordRequiredEventArgs e)
-        {
-            var dlg = new PdfPasswordDialog();
+		void moonPdfPanel_PasswordRequired(object sender, PasswordRequiredEventArgs e)
+		{
+			var dlg = new PdfPasswordDialog();
 
-            if (dlg.ShowDialog() == true)
-                e.Password = dlg.Password;
-            else
-                e.Cancel = true;
-        }
+			if (dlg.ShowDialog() == true)
+				e.Password = dlg.Password;
+			else
+				e.Cancel = true;
+		}
 
 		void MainWindow_Loaded(object sender, RoutedEventArgs e)
 		{
 			var args = Environment.GetCommandLineArgs();
 
 			// if a filename was given via command line
-            if (args.Length > 1 && File.Exists(args[1]))
-            {
-                try
-                {
-                    moonPdfPanel.OpenFile(args[1]);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(string.Format("An error occured: " + ex.Message));
-                }
-            }
+			if (args.Length > 1 && File.Exists(args[1]))
+			{
+				try
+				{
+					moonPdfPanel.OpenFile(args[1]);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(string.Format("An error occured: " + ex.Message));
+				}
+			}
 		}
 
 		void moonPdfPanel_PageDisplayChanged(object sender, EventArgs e)
@@ -132,8 +122,6 @@ namespace MoonPdf
 				case ViewType.BookView:
 					viewBook.IsChecked = true;
 					break;
-				default:
-					break;
 			}
 		}
 
@@ -144,32 +132,30 @@ namespace MoonPdf
 
 		private void UpdateTitle()
 		{
-			if( appName == null )
+			if (appName == null)
 				appName = ((AssemblyProductAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), true).First()).Product;
 
-            if (IsPdfLoaded())
-            {
-                var fs = moonPdfPanel.CurrentSource as FileSource;
+			if (IsPdfLoaded())
+			{
+                if (moonPdfPanel.CurrentSource is FileSource fs)
+				{
+					Title = $"{Path.GetFileName(fs.Filename)} - {appName}";
+					return;
+				}
+			}
 
-                if( fs != null )
-                {
-                    Title = string.Format("{0} - {1}", System.IO.Path.GetFileName(fs.Filename), appName);
-                    return;
-                }
-            }
-            
 			Title = appName;
 		}
 
 		internal bool IsPdfLoaded()
 		{
-            return moonPdfPanel.CurrentSource != null;
+			return moonPdfPanel.CurrentSource != null;
 		}
 
 		protected override void OnPreviewKeyDown(KeyEventArgs e)
 		{
 			base.OnPreviewKeyDown(e);
-			
+
 			if (e.SystemKey == Key.LeftAlt)
 			{
 				mainMenu.Visibility = (mainMenu.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed);

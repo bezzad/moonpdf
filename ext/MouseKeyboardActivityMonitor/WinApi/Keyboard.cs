@@ -31,9 +31,9 @@ namespace MouseKeyboardActivityMonitor.WinApi
             }
 
             ch = (char)inBuffer[0];
-            if ((isDownCapslock ^ isDownShift) && Char.IsLetter(ch))
+            if ((isDownCapslock ^ isDownShift) && char.IsLetter(ch))
             {
-                ch = Char.ToUpper(ch);
+                ch = char.ToUpper(ch);
             }
             return true;
         }

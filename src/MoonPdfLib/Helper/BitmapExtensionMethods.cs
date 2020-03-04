@@ -16,7 +16,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 !*/
 
 using System;
-using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -26,6 +25,7 @@ namespace MoonPdfLib.Helper
     {
         public static BitmapSource ToBitmapSource(this System.Drawing.Bitmap bmp)
         {
+
             try
             {
                 var bitmapData = bmp.LockBits(
@@ -49,6 +49,7 @@ namespace MoonPdfLib.Helper
             }
             finally
             {
+                // Collect all generations of memory.
                 GC.Collect();
             }
         }

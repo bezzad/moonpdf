@@ -14,20 +14,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 !*/
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using MoonPdfLib.Helper;
 
 namespace MoonPdf
 {
@@ -43,9 +33,9 @@ namespace MoonPdf
 			var version = (AssemblyFileVersionAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), true).First();
 			var copyright = (AssemblyCopyrightAttribute)Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), true).First();
 
-			Title = string.Format("About {0}", product.Product);
-			lblInfo.Content = string.Format("{0}, Version {1}", product.Product, version.Version);
-			lblCopyright.Content = string.Format("{0} - {1}", copyright.Copyright, company.Company);
+			Title = $"About {product.Product}";
+			lblInfo.Content = $"{product.Product}, Version {version.Version}";
+			lblCopyright.Content = $"{copyright.Copyright} - {company.Company}";
 		}
 
 		protected override void OnKeyDown(KeyEventArgs e)

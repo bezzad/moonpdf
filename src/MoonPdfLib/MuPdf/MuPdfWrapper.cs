@@ -295,8 +295,8 @@ namespace MoonPdfLib.MuPdf
 	{
 		public float Left, Top, Right, Bottom;
 
-		public float Width => this.Right - this.Left;
-		public float Height => this.Bottom - this.Top;
+		public float Width => Right - Left;
+		public float Height => Bottom - Top;
 	}
 
 #pragma warning disable 0649
@@ -327,7 +327,7 @@ namespace MoonPdfLib.MuPdf
 
 		public FileSource(string filename)
 		{
-			this.Filename = filename;
+			Filename = filename;
 		}
 	}
 
@@ -337,7 +337,7 @@ namespace MoonPdfLib.MuPdf
 
 		public MemorySource(byte[] bytes)
 		{
-			this.Bytes = bytes;
+			Bytes = bytes;
 		}
 	}
 }

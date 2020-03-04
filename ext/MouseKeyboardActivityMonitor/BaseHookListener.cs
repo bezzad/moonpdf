@@ -49,7 +49,7 @@ namespace MouseKeyboardActivityMonitor
         /// A callback function which will be called every time a keyboard or mouse activity detected.
         /// <see cref="WinApi.HookCallback"/>
         /// </summary>
-        protected int HookCallback(int nCode, Int32 wParam, IntPtr lParam)
+        protected int HookCallback(int nCode, int wParam, IntPtr lParam)
         {
             if (nCode == 0)
             {

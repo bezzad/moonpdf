@@ -43,13 +43,13 @@ namespace MouseKeyboardActivityMonitor.WinApi
         /// </list>
         /// </remarks>
         [FieldOffset(0x0A)]
-        public Int16 MouseData;
+        public short MouseData;
 
         /// <summary>
         /// Returns a Timestamp associated with the input, in System Ticks.
         /// </summary>
         [FieldOffset(0x10)]
-        public Int32 Timestamp;
+        public int Timestamp;
     }
 
     /// <summary>
@@ -96,7 +96,7 @@ namespace MouseKeyboardActivityMonitor.WinApi
 #else
         [FieldOffset(0x16)]
 #endif
-        public Int16 MouseData;
+        public short MouseData;
 
         /// <summary>
         /// Converts the current <see cref="AppMouseStruct"/> into a <see cref="MouseStruct"/>.
