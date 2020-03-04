@@ -14,20 +14,14 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 !*/
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace MoonPdfLib.Helper
 {
-	internal static class BitmapExtensionMethods
-	{
+    internal static class BitmapExtensionMethods
+    {
         public static BitmapSource ToBitmapSource(this System.Drawing.Bitmap bmp)
         {
             var rect = new System.Drawing.Rectangle(0, 0, bmp.Width, bmp.Height);
@@ -39,5 +33,5 @@ namespace MoonPdfLib.Helper
 
             return bms;
         }
-	}
+    }
 }

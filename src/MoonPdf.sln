@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonPdfLib", "MoonPdfLib\MoonPdfLib.csproj", "{E5C5A57C-E464-4402-AD62-D6119EA92A8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonPdf", "MoonPdf\MoonPdf.csproj", "{0A2C7E6D-E41B-444E-A74F-C396F7912D9D}"
@@ -61,5 +63,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F52AA97E-180A-40ED-8F2B-09080171D6C7} = {FC019D2F-E7FE-4BBF-B742-6661BACE5D60}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A261673-7795-4566-B0EF-218BA78DC7E0}
 	EndGlobalSection
 EndGlobal

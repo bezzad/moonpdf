@@ -9,3 +9,5 @@ ext/sumatra/output/
 ext/sumatra/mupdf/generated/
 ext/MouseKeyboardActivityMonitor/bin/
 ext/MouseKeyboardActivityMonitor/obj/
+/src/.vs/MoonPdf/v16/Server/sqlite3
+/ext/sumatra/.vs/sumatrapdf-vc2012/v16
