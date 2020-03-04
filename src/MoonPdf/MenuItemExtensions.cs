@@ -53,8 +53,8 @@ namespace MoonPdf
 
 			if (menuItem != null)
 			{
-				String newGroupName = e.NewValue.ToString();
-				String oldGroupName = e.OldValue.ToString();
+				var newGroupName = e.NewValue.ToString();
+				var oldGroupName = e.OldValue.ToString();
 				if (String.IsNullOrEmpty(newGroupName))
 				{
 					//Removing the toggle button from grouping

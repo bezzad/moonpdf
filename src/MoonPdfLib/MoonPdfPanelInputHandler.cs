@@ -78,7 +78,7 @@ namespace MoonPdfLib
 
         private static bool IsScrollBarChild(DependencyObject o)
         {
-            DependencyObject parent = o;
+            var parent = o;
 
             while(parent != null)
             {

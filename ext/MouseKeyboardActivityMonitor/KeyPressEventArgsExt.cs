@@ -23,7 +23,7 @@ namespace MouseKeyboardActivityMonitor
 
         private static KeyPressEventArgsExt CreateNonChar()
         {
-            KeyPressEventArgsExt e = new KeyPressEventArgsExt((char)0x0);
+            var e = new KeyPressEventArgsExt((char)0x0);
             e.IsNonChar = true;
             e.Timestamp = Environment.TickCount;
             return e;
@@ -58,7 +58,7 @@ namespace MouseKeyboardActivityMonitor
             const uint maskKeyup = 0x80000000;           // for bit 31
             const uint maskScanCode = 0xff0000;          // for bit 23-16
 
-            uint flags = 0u;
+            var flags = 0u;
 #if IS_X64
             // both of these are ugly hacks. Is there a better way to convert a 64bit IntPtr to uint?
 
@@ -69,21 +69,21 @@ namespace MouseKeyboardActivityMonitor
 #endif
 
             //bit 30 Specifies the previous key state. The value is 1 if the key is down before the message is sent; it is 0 if the key is up.
-            bool wasKeyDown = (flags & maskKeydown) > 0;
+            var wasKeyDown = (flags & maskKeydown) > 0;
             //bit 31 Specifies the transition state. The value is 0 if the key is being pressed and 1 if it is being released.
-            bool isKeyReleased = (flags & maskKeyup) > 0;
+            var isKeyReleased = (flags & maskKeyup) > 0;
 
             if (!wasKeyDown && !isKeyReleased)
             {
                 return CreateNonChar();
             }
 
-            int virtualKeyCode = wParam;
-            int scanCode = checked((int)(flags & maskScanCode));
+            var virtualKeyCode = wParam;
+            var scanCode = checked((int)(flags & maskScanCode));
             const int fuState = 0;
 
             char ch;
-            bool isSuccessfull = Keyboard.TryGetCharFromKeyboardState(virtualKeyCode, scanCode, fuState, out ch);
+            var isSuccessfull = Keyboard.TryGetCharFromKeyboardState(virtualKeyCode, scanCode, fuState, out ch);
             if (!isSuccessfull)
             {
                 return CreateNonChar();
@@ -107,20 +107,20 @@ namespace MouseKeyboardActivityMonitor
                 return CreateNonChar();
             }
 
-            KeyboardHookStruct keyboardHookStruct = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
+            var keyboardHookStruct = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
 
-            int virtualKeyCode = keyboardHookStruct.VirtualKeyCode;
-            int scanCode = keyboardHookStruct.ScanCode;
-            int fuState = keyboardHookStruct.Flags;
+            var virtualKeyCode = keyboardHookStruct.VirtualKeyCode;
+            var scanCode = keyboardHookStruct.ScanCode;
+            var fuState = keyboardHookStruct.Flags;
 
             char ch;
-            bool isSuccessfull = Keyboard.TryGetCharFromKeyboardState(virtualKeyCode, scanCode, fuState, out ch);
+            var isSuccessfull = Keyboard.TryGetCharFromKeyboardState(virtualKeyCode, scanCode, fuState, out ch);
             if (!isSuccessfull)
             {
                 return CreateNonChar();
             }
 
-            KeyPressEventArgsExt e = new KeyPressEventArgsExt(ch);
+            var e = new KeyPressEventArgsExt(ch);
             e.Timestamp = keyboardHookStruct.Time;		// Update the timestamp to use the actual one from KeyboardHookStruct
 
             return e;

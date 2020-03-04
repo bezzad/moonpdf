@@ -231,7 +231,7 @@ namespace MoonPdfLib
 			{
 				var horizontalBorderOffset = this.HorizontalMargin;
 
-				for (int i = 0; i < singlePageBounds.Length; i++)
+				for (var i = 0; i < singlePageBounds.Length; i++)
 				{
 					if (i == 0 && viewType == MoonPdfLib.ViewType.BookView)
 					{

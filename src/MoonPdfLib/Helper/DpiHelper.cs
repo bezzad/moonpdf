@@ -29,8 +29,8 @@ namespace MoonPdfLib.Helper
 
         public static Dpi GetCurrentDpi()
         {
-            Graphics g = Graphics.FromHwnd(IntPtr.Zero);
-            IntPtr desktop = g.GetHdc();
+            var g = Graphics.FromHwnd(IntPtr.Zero);
+            var desktop = g.GetHdc();
 
             var dpi = new Dpi();
             dpi.HorizontalDpi = GetDeviceCaps(desktop, (int)DeviceCap.LOGPIXELSX);

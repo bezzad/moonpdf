@@ -12,18 +12,18 @@ namespace MouseKeyboardActivityMonitor.WinApi
 
         internal static bool TryGetCharFromKeyboardState(int virtualKeyCode, int scanCode, int fuState, out char ch)
         {
-            bool isDownShift = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
-            bool isDownCapslock = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
+            var isDownShift = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
+            var isDownCapslock = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
 
-            byte[] keyState = new byte[256];
+            var keyState = new byte[256];
             GetKeyboardState(keyState);
-            byte[] inBuffer = new byte[2];
+            var inBuffer = new byte[2];
 
-            bool isSuccesfullyConverted = ToAscii(virtualKeyCode,
-                                                  scanCode,
-                                                  keyState,
-                                                  inBuffer,
-                                                  fuState) == 1;
+            var isSuccesfullyConverted = ToAscii(virtualKeyCode,
+                                             scanCode,
+                                             keyState,
+                                             inBuffer,
+                                             fuState) == 1;
             if (!isSuccesfullyConverted)
             {
                 ch = (char)0;

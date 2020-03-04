@@ -9,7 +9,7 @@ namespace MouseKeyboardActivityMonitor.WinApi
     {
         internal override int Subscribe(int hookId, HookCallback hookCallback)
         {
-            int hookHandle = SetWindowsHookEx(
+            var hookHandle = SetWindowsHookEx(
                 hookId,
                 hookCallback,
                 Process.GetCurrentProcess().MainModule.BaseAddress,

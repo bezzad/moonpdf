@@ -33,7 +33,7 @@ namespace MouseKeyboardActivityMonitor
         /// <returns>A new MouseEventExtArgs object.</returns>
         private static MouseEventExtArgs FromRawDataApp(int wParam, IntPtr lParam)
         {
-            AppMouseStruct marshalledMouseStruct = (AppMouseStruct)Marshal.PtrToStructure(lParam, typeof(AppMouseStruct));
+            var marshalledMouseStruct = (AppMouseStruct)Marshal.PtrToStructure(lParam, typeof(AppMouseStruct));
             return FromRawDataUniversal(wParam, marshalledMouseStruct.ToMouseStruct());
         }
 
@@ -46,7 +46,7 @@ namespace MouseKeyboardActivityMonitor
         /// <returns>A new MouseEventExtArgs object.</returns>
         internal static MouseEventExtArgs FromRawDataGlobal(int wParam, IntPtr lParam)
         {
-            MouseStruct marshalledMouseStruct = (MouseStruct)Marshal.PtrToStructure(lParam, typeof(MouseStruct));
+            var marshalledMouseStruct = (MouseStruct)Marshal.PtrToStructure(lParam, typeof(MouseStruct));
             return FromRawDataUniversal(wParam, marshalledMouseStruct);
         }
 
@@ -58,12 +58,12 @@ namespace MouseKeyboardActivityMonitor
         /// <returns>A new MouseEventExtArgs object.</returns>
         private static MouseEventExtArgs FromRawDataUniversal(int wParam, MouseStruct mouseInfo)
         {
-            MouseButtons button = MouseButtons.None;
+            var button = MouseButtons.None;
             short mouseDelta = 0;
-            int clickCount = 0;
+            var clickCount = 0;
 
-            bool isMouseKeyDown = false;
-            bool isMouseKeyUp = false;
+            var isMouseKeyDown = false;
+            var isMouseKeyUp = false;
 
 
             switch (wParam)

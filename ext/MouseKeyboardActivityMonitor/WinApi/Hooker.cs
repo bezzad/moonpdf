@@ -13,7 +13,7 @@ namespace MouseKeyboardActivityMonitor.WinApi
 
         internal void Unsubscribe(int handle)
         {
-            int result = UnhookWindowsHookEx(handle);
+            var result = UnhookWindowsHookEx(handle);
 
             if (result == 0)
             {
@@ -101,7 +101,7 @@ namespace MouseKeyboardActivityMonitor.WinApi
         internal static void ThrowLastUnmanagedErrorAsException()
         {
             //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
-            int errorCode = Marshal.GetLastWin32Error();
+            var errorCode = Marshal.GetLastWin32Error();
             //Initializes and throws a new instance of the Win32Exception class with the specified error. 
             throw new Win32Exception(errorCode);
         }

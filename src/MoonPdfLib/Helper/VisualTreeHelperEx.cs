@@ -30,7 +30,7 @@ namespace MoonPdfLib.Helper
 			if (o is T)
 				return (T)o;
 
-			for (int i = 0; i < VisualTreeHelper.GetChildrenCount(o); i++)
+			for (var i = 0; i < VisualTreeHelper.GetChildrenCount(o); i++)
 			{
 				var child = VisualTreeHelper.GetChild(o, i);
 				var result = FindChild<T>(child);

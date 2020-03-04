@@ -115,9 +115,9 @@ namespace MouseKeyboardActivityMonitor.Controls
         private void RaiseEventOnUIThread(Delegate inputEvent, EventArgs e)
         {
             object sender = this;
-            foreach (Delegate d in inputEvent.GetInvocationList())
+            foreach (var d in inputEvent.GetInvocationList())
             {
-                ISynchronizeInvoke syncer = d.Target as ISynchronizeInvoke;
+                var syncer = d.Target as ISynchronizeInvoke;
 
                 if (syncer == null)
                 {

@@ -53,7 +53,7 @@ namespace MouseKeyboardActivityMonitor
         {
             if (nCode == 0)
             {
-                bool shouldProcess = ProcessCallback(wParam, lParam);
+                var shouldProcess = ProcessCallback(wParam, lParam);
 
                 if (!shouldProcess)
                 {
@@ -117,7 +117,7 @@ namespace MouseKeyboardActivityMonitor
         /// <param name="hooker">An AppHooker or GlobalHooker object.</param>
         public void Replace(Hooker hooker)
         {
-            bool rememberEnabled = Enabled;
+            var rememberEnabled = Enabled;
             Enabled = false;
             m_Hooker = hooker;
             Enabled = rememberEnabled;
@@ -143,7 +143,7 @@ namespace MouseKeyboardActivityMonitor
             get => HookHandle != 0;
             set
             {
-                bool mustEnable = value;
+                var mustEnable = value;
                 if (mustEnable)
                 {
                     if (!Enabled) 

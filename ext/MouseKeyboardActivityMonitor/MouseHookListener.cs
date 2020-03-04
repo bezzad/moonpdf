@@ -51,7 +51,7 @@ namespace MouseKeyboardActivityMonitor
         /// </returns>
         protected override bool ProcessCallback(int wParam, IntPtr lParam)
         {
-            MouseEventExtArgs e = MouseEventExtArgs.FromRawData(wParam, lParam, IsGlobal);
+            var e = MouseEventExtArgs.FromRawData(wParam, lParam, IsGlobal);
 
             if (e.IsMouseKeyDown)
             {

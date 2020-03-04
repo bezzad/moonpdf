@@ -32,7 +32,7 @@ namespace MouseKeyboardActivityMonitor
         /// </returns>
         protected override bool ProcessCallback(int wParam, IntPtr lParam)
         {
-            KeyEventArgsExt e = KeyEventArgsExt.FromRawData(wParam, lParam, IsGlobal);
+            var e = KeyEventArgsExt.FromRawData(wParam, lParam, IsGlobal);
 
             InvokeKeyDown(e);
             InvokeKeyPress(wParam, lParam);
@@ -59,7 +59,7 @@ namespace MouseKeyboardActivityMonitor
 
         private void InvokeKeyDown(KeyEventArgsExt e)
         {
-            KeyEventHandler handler = KeyDown;
+            var handler = KeyDown;
             if (handler == null || e.Handled || !e.IsKeyDown) { return; }
             handler(this, e);
         }
@@ -88,7 +88,7 @@ namespace MouseKeyboardActivityMonitor
 
         private void InvokeKeyPress(KeyPressEventArgsExt e)
         {
-            KeyPressEventHandler handler = KeyPress;
+            var handler = KeyPress;
             if (handler == null || e.Handled || e.IsNonChar) { return; }
             handler(this, e);
         }
@@ -100,7 +100,7 @@ namespace MouseKeyboardActivityMonitor
 
         private void InvokeKeyUp(KeyEventArgsExt e)
         {
-            KeyEventHandler handler = KeyUp;
+            var handler = KeyUp;
             if (handler == null || e.Handled || !e.IsKeyUp) { return; }
             handler(this, e);
         }

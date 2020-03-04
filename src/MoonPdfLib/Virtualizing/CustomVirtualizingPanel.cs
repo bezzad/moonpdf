@@ -46,7 +46,7 @@ namespace MoonPdfLib.Virtualizing
 		{
 			var sum = 0.0;
 
-			for (int i = 0; i < PageRowBounds.Length; i++)
+			for (var i = 0; i < PageRowBounds.Length; i++)
 			{
 				sum += PageRowBounds[i].Height;
 
@@ -83,25 +83,25 @@ namespace MoonPdfLib.Virtualizing
 				return availableSize;
 
 			// We need to access InternalChildren before the generator to work around a bug
-			UIElementCollection children = this.InternalChildren;
-			IItemContainerGenerator generator = this.ItemContainerGenerator;
+			var children = this.InternalChildren;
+			var generator = this.ItemContainerGenerator;
 
 			// Get the generator position of the first visible data item
-			GeneratorPosition startPos = generator.GeneratorPositionFromIndex(firstVisibleItemIndex);
+			var startPos = generator.GeneratorPositionFromIndex(firstVisibleItemIndex);
 
 			// Get index where we'd insert the child for this position. If the item is realized
 			// (position.Offset == 0), it's just position.Index, otherwise we have to add one to
 			// insert after the corresponding child
-			int childIndex = (startPos.Offset == 0) ? startPos.Index : startPos.Index + 1;
+			var childIndex = (startPos.Offset == 0) ? startPos.Index : startPos.Index + 1;
 
 			using (generator.StartAt(startPos, GeneratorDirection.Forward, true))
 			{
-				for (int itemIndex = firstVisibleItemIndex; itemIndex <= lastVisibleItemIndex; ++itemIndex, ++childIndex)
+				for (var itemIndex = firstVisibleItemIndex; itemIndex <= lastVisibleItemIndex; ++itemIndex, ++childIndex)
 				{
 					bool newlyRealized;
 
 					// Get or create the child
-					UIElement child = generator.GenerateNext(out newlyRealized) as UIElement;
+					var child = generator.GenerateNext(out newlyRealized) as UIElement;
 					if (newlyRealized)
 					{
 						// Figure out if we need to insert the child at the end or somewhere in the middle
@@ -139,16 +139,16 @@ namespace MoonPdfLib.Virtualizing
 		/// <returns>Size used</returns>
 		protected override System.Windows.Size ArrangeOverride(System.Windows.Size finalSize)
 		{
-			IItemContainerGenerator generator = this.ItemContainerGenerator;
+			var generator = this.ItemContainerGenerator;
 
 			UpdateScrollInfo(finalSize);
 
-			for (int i = 0; i < this.Children.Count; i++)
+			for (var i = 0; i < this.Children.Count; i++)
 			{
-				UIElement child = this.Children[i];
+				var child = this.Children[i];
 
 				// Map the child offset to an item offset
-				int itemIndex = generator.IndexFromGeneratorPosition(new GeneratorPosition(i, 0));
+				var itemIndex = generator.IndexFromGeneratorPosition(new GeneratorPosition(i, 0));
 
 				ArrangeChild(itemIndex, child, finalSize);
 			}
@@ -163,13 +163,13 @@ namespace MoonPdfLib.Virtualizing
 		/// <param name="maxDesiredGenerated">last item index that should be visible</param>
 		private void CleanUpItems(int minDesiredGenerated, int maxDesiredGenerated)
 		{
-			UIElementCollection children = this.InternalChildren;
-			IItemContainerGenerator generator = this.ItemContainerGenerator;
+			var children = this.InternalChildren;
+			var generator = this.ItemContainerGenerator;
 
-			for (int i = children.Count - 1; i >= 0; i--)
+			for (var i = children.Count - 1; i >= 0; i--)
 			{
-				GeneratorPosition childGeneratorPos = new GeneratorPosition(i, 0);
-				int itemIndex = generator.IndexFromGeneratorPosition(childGeneratorPos);
+				var childGeneratorPos = new GeneratorPosition(i, 0);
+				var itemIndex = generator.IndexFromGeneratorPosition(childGeneratorPos);
 
 				if (itemIndex < minDesiredGenerated || itemIndex > maxDesiredGenerated)
 				{
@@ -216,11 +216,11 @@ namespace MoonPdfLib.Virtualizing
 			if (PageRowBounds == null || PageRowBounds.Length == 0)
 				return;
 
-			double sum = 0.0;
+			var sum = 0.0;
 			var bottom = _offset.Y + _viewport.Height;
 
 			// we iterate through all the items and add the height of them to "sum"
-			for (int i = 0; i < PageRowBounds.Length; i++)
+			for (var i = 0; i < PageRowBounds.Length; i++)
 			{
 				sum += PageRowBounds[i].Height;
 
@@ -232,7 +232,7 @@ namespace MoonPdfLib.Virtualizing
 					lastVisibleItemIndex = i;
 
 					// used to determine the lastVisibleItemIndex
-					for (int k = i + 1; k < PageRowBounds.Length; k++)
+					for (var k = i + 1; k < PageRowBounds.Length; k++)
 					{
 						sum += PageRowBounds[k].Height;
 
@@ -247,8 +247,8 @@ namespace MoonPdfLib.Virtualizing
 				}
 			}
 
-			ItemsControl itemsControl = ItemsControl.GetItemsOwner(this);
-			int itemCount = itemsControl.HasItems ? itemsControl.Items.Count : 0;
+			var itemsControl = ItemsControl.GetItemsOwner(this);
+			var itemCount = itemsControl.HasItems ? itemsControl.Items.Count : 0;
 
 			if (lastVisibleItemIndex >= itemCount)
 				lastVisibleItemIndex = itemCount - 1;
@@ -287,10 +287,10 @@ namespace MoonPdfLib.Virtualizing
 		private void UpdateScrollInfo(Size availableSize)
 		{
 			// See how many items there are
-			ItemsControl itemsControl = ItemsControl.GetItemsOwner(this);
-			int itemCount = itemsControl.HasItems ? itemsControl.Items.Count : 0;
+			var itemsControl = ItemsControl.GetItemsOwner(this);
+			var itemCount = itemsControl.HasItems ? itemsControl.Items.Count : 0;
 
-			Size extent = CalculateExtent(availableSize, itemCount);
+			var extent = CalculateExtent(availableSize, itemCount);
 			// Update extent
 			if (extent != _extent)
 			{

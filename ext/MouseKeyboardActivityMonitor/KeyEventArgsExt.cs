@@ -54,9 +54,9 @@ namespace MouseKeyboardActivityMonitor
             const uint maskKeydown = 0x40000000; // for bit 30
             const uint maskKeyup = 0x80000000; // for bit 31
 
-            int timestamp = Environment.TickCount;
+            var timestamp = Environment.TickCount;
 
-            uint flags = 0u;
+            var flags = 0u;
 #if IS_X64
             // both of these are ugly hacks. Is there a better way to convert a 64bit IntPtr to uint?
 
@@ -68,14 +68,14 @@ namespace MouseKeyboardActivityMonitor
             
 
             //bit 30 Specifies the previous key state. The value is 1 if the key is down before the message is sent; it is 0 if the key is up.
-            bool wasKeyDown = (flags & maskKeydown) > 0;
+            var wasKeyDown = (flags & maskKeydown) > 0;
             //bit 31 Specifies the transition state. The value is 0 if the key is being pressed and 1 if it is being released.
-            bool isKeyReleased = (flags & maskKeyup) > 0;
+            var isKeyReleased = (flags & maskKeyup) > 0;
 
-            Keys keyData = (Keys)wParam;
+            var keyData = (Keys)wParam;
 
-            bool isKeyDown = !wasKeyDown && !isKeyReleased;
-            bool isKeyUp = wasKeyDown && isKeyReleased;
+            var isKeyDown = !wasKeyDown && !isKeyReleased;
+            var isKeyUp = wasKeyDown && isKeyReleased;
 
             return new KeyEventArgsExt(keyData, timestamp, isKeyDown, isKeyUp);
         }
@@ -89,10 +89,10 @@ namespace MouseKeyboardActivityMonitor
         /// <returns>A new KeyEventArgsExt object.</returns>
         private static KeyEventArgsExt FromRawDataGlobal(int wParam, IntPtr lParam)
         {
-            KeyboardHookStruct keyboardHookStruct = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
-            Keys keyData = (Keys)keyboardHookStruct.VirtualKeyCode;
-            bool isKeyDown = (wParam == Messages.WM_KEYDOWN || wParam == Messages.WM_SYSKEYDOWN);
-            bool isKeyUp = (wParam == Messages.WM_KEYUP || wParam == Messages.WM_SYSKEYUP);
+            var keyboardHookStruct = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
+            var keyData = (Keys)keyboardHookStruct.VirtualKeyCode;
+            var isKeyDown = (wParam == Messages.WM_KEYDOWN || wParam == Messages.WM_SYSKEYDOWN);
+            var isKeyUp = (wParam == Messages.WM_KEYUP || wParam == Messages.WM_SYSKEYUP);
             
             return new KeyEventArgsExt(keyData, keyboardHookStruct.Time, isKeyDown, isKeyUp);
         }
