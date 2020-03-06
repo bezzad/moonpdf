@@ -29,7 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\MoonPdfLib\ContinuousMoonPdfPanel.xaml.cs" Link="ContinuousMoonPdfPanel.xaml.cs" />
+    <Page Remove="GlobalResources.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\MoonPdfLib\Helper\BitmapExtensionMethods.cs" Link="Helper\BitmapExtensionMethods.cs" />
     <Compile Include="..\MoonPdfLib\Helper\Dpi.cs" Link="Helper\Dpi.cs" />
     <Compile Include="..\MoonPdfLib\Helper\DpiHelper.cs" Link="Helper\DpiHelper.cs" />
@@ -38,7 +41,6 @@
     <Compile Include="..\MoonPdfLib\Helper\VisualTreeHelperEx.cs" Link="Helper\VisualTreeHelperEx.cs" />
     <Compile Include="..\MoonPdfLib\ImageRotation.cs" Link="ImageRotation.cs" />
     <Compile Include="..\MoonPdfLib\IMoonPdfPanel.cs" Link="IMoonPdfPanel.cs" />
-    <Compile Include="..\MoonPdfLib\MoonPdfPanel.xaml.cs" Link="MoonPdfPanel.xaml.cs" />
     <Compile Include="..\MoonPdfLib\MoonPdfPanelInputHandler.cs" Link="MoonPdfPanelInputHandler.cs" />
     <Compile Include="..\MoonPdfLib\MuPdf\BBox.cs" Link="MuPdf\BBox.cs" />
     <Compile Include="..\MoonPdfLib\MuPdf\FileSource.cs" Link="MuPdf\FileSource.cs" />
@@ -54,7 +56,6 @@
     <Compile Include="..\MoonPdfLib\PasswordRequiredEventArgs.cs" Link="PasswordRequiredEventArgs.cs" />
     <Compile Include="..\MoonPdfLib\PdfImage.cs" Link="PdfImage.cs" />
     <Compile Include="..\MoonPdfLib\PdfImageProvider.cs" Link="PdfImageProvider.cs" />
-    <Compile Include="..\MoonPdfLib\SinglePageMoonPdfPanel.xaml.cs" Link="SinglePageMoonPdfPanel.xaml.cs" />
     <Compile Include="..\MoonPdfLib\ViewType.cs" Link="ViewType.cs" />
     <Compile Include="..\MoonPdfLib\Virtualizing\AsyncVirtualizingCollection.cs" Link="Virtualizing\AsyncVirtualizingCollection.cs" />
     <Compile Include="..\MoonPdfLib\Virtualizing\CustomVirtualizingPanel.cs" Link="Virtualizing\CustomVirtualizingPanel.cs" />
@@ -75,9 +76,18 @@
     <Compile Update="MoonPdfPanel.xaml.cs">
       <DependentUpon>MoonPdfPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Update="SinglePageMoonPdfPanel.xaml.cs">
+      <DependentUpon>SinglePageMoonPdfPanel.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="ContinuousMoonPdfPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MoonPdfPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="SinglePageMoonPdfPanel.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -90,6 +100,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ext\MouseKeyboardActivityMonitor.Core\MouseKeyboardActivityMonitor.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="GlobalResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">

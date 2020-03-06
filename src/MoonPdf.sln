@@ -13,7 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThirdParty", "ThirdParty", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoofPdfCore", "MoofPdfCore\MoofPdfCore.csproj", "{84B4AFD6-DCF0-42D2-A497-94DF02EA7BF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseKeyboardActivityMonitor.Core", "..\ext\MouseKeyboardActivityMonitor.Core\MouseKeyboardActivityMonitor.Core.csproj", "{F34B8683-B178-4F19-B596-8ADDA5A0DC19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MouseKeyboardActivityMonitor.Core", "..\ext\MouseKeyboardActivityMonitor.Core\MouseKeyboardActivityMonitor.Core.csproj", "{F34B8683-B178-4F19-B596-8ADDA5A0DC19}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{B21119C7-265D-406C-8AF3-01FA4F586EAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,6 +92,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{0A2C7E6D-E41B-444E-A74F-C396F7912D9D} = {B21119C7-265D-406C-8AF3-01FA4F586EAF}
 		{F52AA97E-180A-40ED-8F2B-09080171D6C7} = {FC019D2F-E7FE-4BBF-B742-6661BACE5D60}
 		{F34B8683-B178-4F19-B596-8ADDA5A0DC19} = {FC019D2F-E7FE-4BBF-B742-6661BACE5D60}
 	EndGlobalSection
