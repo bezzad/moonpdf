@@ -12,12 +12,12 @@
     <Product>MoonPdf</Product>
   </PropertyGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy $(SolutionDir)\MoonPdfCore\NativeLibs\$(PlatformName)\libmupdf.dll $(TargetDir) /Y" />
-  </Target>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="$(SolutionDir)..\bin\HeaderLicensePrepend\HeaderLicensePrepend.exe $(ProjectDir)headertemplate.json" />
+    <Exec Command="$(SolutionDir)\..\bin\HeaderLicensePrepend\HeaderLicensePrepend.exe $(ProjectDir)\headertemplate.json" />
   </Target>
 
   <ItemGroup>
@@ -57,5 +57,9 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy $(SolutionDir)\MoonPdfLib\NativeLibs\$(PlatformName)\libmupdf.dll $(TargetDir) /Y" />
+  </Target>
 
 </Project>
