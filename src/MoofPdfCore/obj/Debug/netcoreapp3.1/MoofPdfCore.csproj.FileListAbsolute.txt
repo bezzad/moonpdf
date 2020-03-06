@@ -1,8 +1,0 @@
-D:\programming\Projecting\moonpdf\src\MoofPdfCore\bin\Debug\netcoreapp3.1\MoonPdfCore.deps.json
-D:\programming\Projecting\moonpdf\src\MoofPdfCore\bin\Debug\netcoreapp3.1\MoonPdfCore.dll
-D:\programming\Projecting\moonpdf\src\MoofPdfCore\bin\Debug\netcoreapp3.1\MoonPdfCore.pdb
-D:\programming\Projecting\moonpdf\src\MoofPdfCore\obj\Debug\netcoreapp3.1\MoofPdfCore.csprojAssemblyReference.cache
-D:\programming\Projecting\moonpdf\src\MoofPdfCore\obj\Debug\netcoreapp3.1\MoofPdfCore.AssemblyInfoInputs.cache
-D:\programming\Projecting\moonpdf\src\MoofPdfCore\obj\Debug\netcoreapp3.1\MoofPdfCore.AssemblyInfo.cs
-D:\programming\Projecting\moonpdf\src\MoofPdfCore\obj\Debug\netcoreapp3.1\MoonPdfCore.dll
-D:\programming\Projecting\moonpdf\src\MoofPdfCore\obj\Debug\netcoreapp3.1\MoonPdfCore.pdb
