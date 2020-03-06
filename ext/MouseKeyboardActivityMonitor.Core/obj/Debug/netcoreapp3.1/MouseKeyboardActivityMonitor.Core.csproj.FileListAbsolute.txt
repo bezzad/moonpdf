@@ -1,0 +1,7 @@
+D:\programming\Projecting\moonpdf\ext\MouseKeyboardActivityMonitor.Core\obj\Debug\netcoreapp3.1\MouseKeyboardActivityMonitor.Core.AssemblyInfoInputs.cache
+D:\programming\Projecting\moonpdf\ext\MouseKeyboardActivityMonitor.Core\obj\Debug\netcoreapp3.1\MouseKeyboardActivityMonitor.Core.AssemblyInfo.cs
+D:\programming\Projecting\moonpdf\ext\MouseKeyboardActivityMonitor.Core\bin\Debug\netcoreapp3.1\MouseKeyboardActivityMonitor.Core.deps.json
+D:\programming\Projecting\moonpdf\ext\MouseKeyboardActivityMonitor.Core\bin\Debug\netcoreapp3.1\MouseKeyboardActivityMonitor.Core.dll
+D:\programming\Projecting\moonpdf\ext\MouseKeyboardActivityMonitor.Core\bin\Debug\netcoreapp3.1\MouseKeyboardActivityMonitor.Core.pdb
+D:\programming\Projecting\moonpdf\ext\MouseKeyboardActivityMonitor.Core\obj\Debug\netcoreapp3.1\MouseKeyboardActivityMonitor.Core.dll
+D:\programming\Projecting\moonpdf\ext\MouseKeyboardActivityMonitor.Core\obj\Debug\netcoreapp3.1\MouseKeyboardActivityMonitor.Core.pdb

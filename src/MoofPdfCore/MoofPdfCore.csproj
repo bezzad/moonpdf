@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>MoonPdfCore</AssemblyName>
+    <RootNamespace>MoonPdfLib</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MouseKeyboardActivityMonitor.Coe\MouseKeyboardActivityMonitor.Core.csproj" />
+  </ItemGroup>
+
+</Project>

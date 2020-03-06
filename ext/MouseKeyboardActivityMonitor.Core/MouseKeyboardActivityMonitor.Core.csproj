@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>MouseKeyboardActivityMonitor</RootNamespace>
+    <ApplicationIcon />
+    <StartupObject />
+    <Version>3.0.1</Version>
+    <AssemblyVersion>3.0.1.0</AssemblyVersion>
+    <Description>This class library contains components to monitor mouse and keyboard activities and provides appropriate events.</Description>
+    <Company>Mouse and Keyboard Hooks .NET</Company>
+    <Product>Mouse and Keyboard Hooks .NET</Product>
+    <Copyright>Open Source under Ms-PL License.</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\MouseKeyboardActivityMonitor\BaseHookListener.cs" Link="BaseHookListener.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\Controls\HookType.cs" Link="Controls\HookType.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\Controls\MouseKeyEventProvider.cs" Link="Controls\MouseKeyEventProvider.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\KeyboardHookListener.cs" Link="KeyboardHookListener.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\KeyEventArgsExt.cs" Link="KeyEventArgsExt.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\KeyPressEventArgsExt.cs" Link="KeyPressEventArgsExt.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\MouseEventExtArgs.cs" Link="MouseEventExtArgs.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\MouseHookListener.cs" Link="MouseHookListener.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\WinApi\AppHooker.cs" Link="WinApi\AppHooker.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\WinApi\GlobalHooker.cs" Link="WinApi\GlobalHooker.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\WinApi\HookCallback.cs" Link="WinApi\HookCallback.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\WinApi\Hooker.cs" Link="WinApi\Hooker.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\WinApi\Keyboard.cs" Link="WinApi\Keyboard.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\WinApi\KeyboardHookStruct.cs" Link="WinApi\KeyboardHookStruct.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\WinApi\Messages.cs" Link="WinApi\Messages.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\WinApi\Mouse.cs" Link="WinApi\Mouse.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\WinApi\MouseStructures.cs" Link="WinApi\MouseStructures.cs" />
+    <Compile Include="..\MouseKeyboardActivityMonitor\WinApi\Point.cs" Link="WinApi\Point.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\" />
+    <Folder Include="WinApi\" />
+  </ItemGroup>
+
+</Project>
