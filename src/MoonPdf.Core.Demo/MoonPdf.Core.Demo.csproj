@@ -25,9 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="AboutWindow.xaml.cs">
-      <DependentUpon>AboutWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Update="GotoPageDialog.xaml.cs">
       <DependentUpon>GotoPageDialog.xaml</DependentUpon>
     </Compile>
@@ -54,12 +51,6 @@
 
   <ItemGroup>
     <Page Update="AboutWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="GotoPageDialog.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="PdfPasswordDialog.xaml">
