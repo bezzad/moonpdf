@@ -9,7 +9,7 @@
     <TieredCompilation>true</TieredCompilation>
     <PublishReadyToRun>true</PublishReadyToRun>
     <UseAppHost>true</UseAppHost>
-    <RuntimeIdentifier>win10-x86</RuntimeIdentifier>
+    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
     <PublishSingleFile>true</PublishSingleFile>
     <PublishTrimmed>true</PublishTrimmed>
     <PublishReadyToRun>true</PublishReadyToRun>
@@ -29,6 +29,14 @@
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="$(SolutionDir)\..\bin\HeaderLicensePrepend\HeaderLicensePrepend.exe $(ProjectDir)\headertemplate.json" />
   </Target>
+
+  <ItemGroup>
+    <Content Include="libmupdf.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="libmupdf.dll" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" ExcludeFromSingleFile="False" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MoofPdfCore\MoofPdfCore.csproj" />
