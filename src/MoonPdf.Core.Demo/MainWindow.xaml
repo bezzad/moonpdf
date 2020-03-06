@@ -39,9 +39,6 @@
                 <Separator/>
                 <MenuItem Header="{Binding Commands.GotoPageCommand.Name}" Command="{Binding Commands.GotoPageCommand}" InputGestureText="{Binding Commands.GotoPageCommand.GestureText}"/>
             </MenuItem>
-            <MenuItem Header="_Help">
-                <MenuItem Header="{Binding Commands.ShowAboutCommand.Name}" Command="{Binding Commands.ShowAboutCommand}"/>
-            </MenuItem>
         </Menu>
         <mpp:MoonPdfPanel Background="LightGray" MaxZoomFactor="2.8" ViewType="SinglePage" PageRowDisplay="SinglePageRow" PageMargin="0,2,4,2" AllowDrop="True" x:Name="moonPdfPanel" x:FieldModifier="private"/>
     </DockPanel>
