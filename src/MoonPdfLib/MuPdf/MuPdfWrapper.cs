@@ -21,17 +21,15 @@ namespace MoonPdfLib.MuPdf
 		{
 			var pageNumberIndex = Math.Max(0, pageNumber - 1); // pages start at index 0
 
-			using (var stream = new PdfFileStream(source))
-			{
-				ValidatePassword(stream.Document, password);
+            using var stream = new PdfFileStream(source);
+            ValidatePassword(stream.Document, password);
 
-				var p = NativeMethods.LoadPage(stream.Document, pageNumberIndex); // loads the page
-				var bmp = RenderPage(stream.Context, stream.Document, p, zoomFactor);
-				NativeMethods.FreePage(stream.Document, p); // releases the resources consumed by the page
+            var p = NativeMethods.LoadPage(stream.Document, pageNumberIndex); // loads the page
+            var bmp = RenderPage(stream.Context, stream.Document, p, zoomFactor);
+            NativeMethods.FreePage(stream.Document, p); // releases the resources consumed by the page
 
-				return bmp;
-			}
-		}
+            return bmp;
+        }
 
 		/// <summary>
 		/// Gets the page bounds for all pages of the given PDF. If a relevant rotation is supplied, the bounds will
@@ -47,47 +45,41 @@ namespace MoonPdfLib.MuPdf
 			if (rotation == ImageRotation.Rotate90 || rotation == ImageRotation.Rotate270)
 				sizeCallback = (width, height) => new System.Windows.Size(height, width); // switch width and height
 
-			using (var stream = new PdfFileStream(source))
-			{
-				ValidatePassword(stream.Document, password);
+            using var stream = new PdfFileStream(source);
+            ValidatePassword(stream.Document, password);
 
-				var pageCount = NativeMethods.CountPages(stream.Document); // gets the number of pages in the document
-				var resultBounds = new System.Windows.Size[pageCount];
+            var pageCount = NativeMethods.CountPages(stream.Document); // gets the number of pages in the document
+            var resultBounds = new System.Windows.Size[pageCount];
 
-				for (var i = 0; i < pageCount; i++)
-				{
-					var p = NativeMethods.LoadPage(stream.Document, i); // loads the page
-					var pageBound = NativeMethods.BoundPage(stream.Document, p);
+            for (var i = 0; i < pageCount; i++)
+            {
+                var p = NativeMethods.LoadPage(stream.Document, i); // loads the page
+                var pageBound = NativeMethods.BoundPage(stream.Document, p);
 
-					resultBounds[i] = sizeCallback(pageBound.Width, pageBound.Height);
+                resultBounds[i] = sizeCallback(pageBound.Width, pageBound.Height);
 
-					NativeMethods.FreePage(stream.Document, p); // releases the resources consumed by the page
-				}
+                NativeMethods.FreePage(stream.Document, p); // releases the resources consumed by the page
+            }
 
-				return resultBounds;
-			}
-		}
+            return resultBounds;
+        }
 
 		/// <summary>
 		/// Return the total number of pages for a give PDF.
 		/// </summary>
 		public static int CountPages(IPdfSource source, string password = null)
-		{
-			using (var stream = new PdfFileStream(source))
-			{
-				ValidatePassword(stream.Document, password);
+        {
+            using var stream = new PdfFileStream(source);
+            ValidatePassword(stream.Document, password);
 
-				return NativeMethods.CountPages(stream.Document); // gets the number of pages in the document
-			}
-		}
+            return NativeMethods.CountPages(stream.Document); // gets the number of pages in the document
+        }
 
 		public static bool NeedsPassword(IPdfSource source)
-		{
-			using (var stream = new PdfFileStream(source))
-			{
-				return NeedsPassword(stream.Document);
-			}
-		}
+        {
+            using var stream = new PdfFileStream(source);
+            return NeedsPassword(stream.Document);
+        }
 
 		private static void ValidatePassword(IntPtr doc, string password)
 		{
@@ -272,8 +264,4 @@ namespace MoonPdfLib.MuPdf
 			public static extern IntPtr OpenStream(IntPtr ctx, IntPtr data, int len);
 		}
 	}
-
-#pragma warning disable 0649
-
-#pragma warning restore 0649
 }
