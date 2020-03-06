@@ -5,10 +5,100 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>MoonPdfCore</AssemblyName>
     <RootNamespace>MoonPdfLib</RootNamespace>
+    <PackageId>MoonPdfLib</PackageId>
+    <Version>0.3.1.0</Version>
+    <Copyright>Copyright ©  2020</Copyright>
+    <Description>Provides a WPF user control to display PDF files</Description>
+    <Product>MoonPdfLib</Product>
+    <Authors>Bezzad</Authors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\MoonPdfLib\ContinuousMoonPdfPanel.xaml.cs" Link="ContinuousMoonPdfPanel.xaml.cs" />
+    <Compile Include="..\MoonPdfLib\Helper\BitmapExtensionMethods.cs" Link="Helper\BitmapExtensionMethods.cs" />
+    <Compile Include="..\MoonPdfLib\Helper\Dpi.cs" Link="Helper\Dpi.cs" />
+    <Compile Include="..\MoonPdfLib\Helper\DpiHelper.cs" Link="Helper\DpiHelper.cs" />
+    <Compile Include="..\MoonPdfLib\Helper\ListExtension.cs" Link="Helper\ListExtension.cs" />
+    <Compile Include="..\MoonPdfLib\Helper\PageHelper.cs" Link="Helper\PageHelper.cs" />
+    <Compile Include="..\MoonPdfLib\Helper\VisualTreeHelperEx.cs" Link="Helper\VisualTreeHelperEx.cs" />
+    <Compile Include="..\MoonPdfLib\ImageRotation.cs" Link="ImageRotation.cs" />
+    <Compile Include="..\MoonPdfLib\IMoonPdfPanel.cs" Link="IMoonPdfPanel.cs" />
+    <Compile Include="..\MoonPdfLib\MoonPdfPanel.xaml.cs" Link="MoonPdfPanel.xaml.cs" />
+    <Compile Include="..\MoonPdfLib\MoonPdfPanelInputHandler.cs" Link="MoonPdfPanelInputHandler.cs" />
+    <Compile Include="..\MoonPdfLib\MuPdf\BBox.cs" Link="MuPdf\BBox.cs" />
+    <Compile Include="..\MoonPdfLib\MuPdf\FileSource.cs" Link="MuPdf\FileSource.cs" />
+    <Compile Include="..\MoonPdfLib\MuPdf\IPdfSource.cs" Link="MuPdf\IPdfSource.cs" />
+    <Compile Include="..\MoonPdfLib\MuPdf\Matrix.cs" Link="MuPdf\Matrix.cs" />
+    <Compile Include="..\MoonPdfLib\MuPdf\MemorySource.cs" Link="MuPdf\MemorySource.cs" />
+    <Compile Include="..\MoonPdfLib\MuPdf\MissingOrInvalidPdfPasswordException.cs" Link="MuPdf\MissingOrInvalidPdfPasswordException.cs" />
+    <Compile Include="..\MoonPdfLib\MuPdf\MuPdfWrapper.cs" Link="MuPdf\MuPdfWrapper.cs" />
+    <Compile Include="..\MoonPdfLib\MuPdf\Rectangle.cs" Link="MuPdf\Rectangle.cs" />
+    <Compile Include="..\MoonPdfLib\PageDisplaySettings.cs" Link="PageDisplaySettings.cs" />
+    <Compile Include="..\MoonPdfLib\PageRowBound.cs" Link="PageRowBound.cs" />
+    <Compile Include="..\MoonPdfLib\PageRowDisplayType.cs" Link="PageRowDisplayType.cs" />
+    <Compile Include="..\MoonPdfLib\PasswordRequiredEventArgs.cs" Link="PasswordRequiredEventArgs.cs" />
+    <Compile Include="..\MoonPdfLib\PdfImage.cs" Link="PdfImage.cs" />
+    <Compile Include="..\MoonPdfLib\PdfImageProvider.cs" Link="PdfImageProvider.cs" />
+    <Compile Include="..\MoonPdfLib\SinglePageMoonPdfPanel.xaml.cs" Link="SinglePageMoonPdfPanel.xaml.cs" />
+    <Compile Include="..\MoonPdfLib\ViewType.cs" Link="ViewType.cs" />
+    <Compile Include="..\MoonPdfLib\Virtualizing\AsyncVirtualizingCollection.cs" Link="Virtualizing\AsyncVirtualizingCollection.cs" />
+    <Compile Include="..\MoonPdfLib\Virtualizing\CustomVirtualizingPanel.cs" Link="Virtualizing\CustomVirtualizingPanel.cs" />
+    <Compile Include="..\MoonPdfLib\Virtualizing\IItemsProvider.cs" Link="Virtualizing\IItemsProvider.cs" />
+    <Compile Include="..\MoonPdfLib\Virtualizing\VirtualizingCollection.cs" Link="Virtualizing\VirtualizingCollection.cs" />
+    <Compile Include="..\MoonPdfLib\ZoomType.cs" Link="ZoomType.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ext\MouseKeyboardActivityMonitor.Core\MouseKeyboardActivityMonitor.Core.csproj" />
     <ProjectReference Include="..\MouseKeyboardActivityMonitor.Coe\MouseKeyboardActivityMonitor.Core.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ContinuousMoonPdfPanel.xaml.cs">
+      <DependentUpon>ContinuousMoonPdfPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MoonPdfPanel.xaml.cs">
+      <DependentUpon>MoonPdfPanel.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="SinglePageMoonPdfPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helper\" />
+    <Folder Include="MuPdf\" />
+    <Folder Include="NativeLibs\AnyCPU\" />
+    <Folder Include="NativeLibs\x64\" />
+    <Folder Include="NativeLibs\x86\" />
+    <Folder Include="Virtualizing\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\MoonPdfLib\NativeLibs\AnyCPU\libmupdf.dll" Link="NativeLibs\AnyCPU\libmupdf.dll" />
+    <None Include="..\MoonPdfLib\NativeLibs\x64\libmupdf.dll" Link="NativeLibs\x64\libmupdf.dll" />
+    <None Include="..\MoonPdfLib\NativeLibs\x86\libmupdf.dll" Link="NativeLibs\x86\libmupdf.dll" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="$(SolutionDir)..\bin\HeaderLicensePrepend\HeaderLicensePrepend.exe $(ProjectDir)headertemplate.json" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy $(SolutionDir)\MoonPdfLib\NativeLibs\$(PlatformName)\libmupdf.dll $(TargetDir) /Y" />
+  </Target>
 
 </Project>

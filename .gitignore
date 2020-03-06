@@ -5,9 +5,13 @@ src/MoonPdf/bin/
 src/MoonPdf/obj/
 src/MoonPdfLib/bin/
 src/MoonPdfLib/obj/
+src/MoonPdfCore/bin/
+src/MoonPdfCore/obj/
 ext/sumatra/output/
 ext/sumatra/mupdf/generated/
 ext/MouseKeyboardActivityMonitor/bin/
 ext/MouseKeyboardActivityMonitor/obj/
+ext/MouseKeyboardActivityMonitor.core/bin/
+ext/MouseKeyboardActivityMonitor.core/obj/
 /src/.vs/MoonPdf/v16/Server/sqlite3
 /ext/sumatra/.vs/sumatrapdf-vc2012/v16
