@@ -18,25 +18,38 @@ using System.Windows;
 
 namespace MoonPdf
 {
-    public partial class PdfPasswordDialog : Window
+    public partial class GotoPageDialog : Window
     {
-        public string Password { get; private set; }
+        private int MaxPageNumber { get; }
+        public int? SelectedPageNumber { get; private set; }
 
-        public PdfPasswordDialog()
+        public GotoPageDialog(int currentPageNumber, int maxPageNumber)
         {
             InitializeComponent();
-            Loaded += PdfPasswordDialog_Loaded;
+
+            MaxPageNumber = maxPageNumber;
+            txtPage.Text = currentPageNumber.ToString();
+            lblMaxPageNumber.Content = maxPageNumber;
+            Loaded += GotoPageDialog_Loaded;
         }
 
-        void PdfPasswordDialog_Loaded(object sender, RoutedEventArgs e)
+        void GotoPageDialog_Loaded(object sender, RoutedEventArgs e)
         {
-            txtPassword.Focus();
-            txtPassword.SelectAll();
+            txtPage.Focus();
+            txtPage.SelectAll();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Password = txtPassword.Password;
+            int page;
+
+            if (!int.TryParse(txtPage.Text, out page) || page > MaxPageNumber || page < 1)
+            {
+                MessageBox.Show("Please enter a valid page number.");
+                return;
+            }
+
+            SelectedPageNumber = page;
             DialogResult = true;
             Close();
         }
