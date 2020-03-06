@@ -164,7 +164,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(SolutionDir)\MoonPdfLib\NativeLibs\$(PlatformName)\libmupdf.dll $(TargetDir) /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy $(ProjectDir)\NativeLibs\$(PlatformName)\libmupdf.dll $(TargetDir) /Y</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>$(SolutionDir)..\bin\HeaderLicensePrepend\HeaderLicensePrepend.exe $(ProjectDir)headertemplate.json</PreBuildEvent>

@@ -24,6 +24,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="NativeLibs\x64\libmupdf.dll" />
+    <None Remove="NativeLibs\x86\libmupdf.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\MoonPdfLib\ContinuousMoonPdfPanel.xaml.cs" Link="ContinuousMoonPdfPanel.xaml.cs" />
     <Compile Include="..\MoonPdfLib\Helper\BitmapExtensionMethods.cs" Link="Helper\BitmapExtensionMethods.cs" />
     <Compile Include="..\MoonPdfLib\Helper\Dpi.cs" Link="Helper\Dpi.cs" />
@@ -59,8 +64,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ext\MouseKeyboardActivityMonitor.Core\MouseKeyboardActivityMonitor.Core.csproj" />
-    <ProjectReference Include="..\MouseKeyboardActivityMonitor.Coe\MouseKeyboardActivityMonitor.Core.csproj" />
+    <Content Include="NativeLibs\x64\libmupdf.dll" />
+    <Content Include="NativeLibs\x86\libmupdf.dll" />
   </ItemGroup>
 
   <ItemGroup>
@@ -81,16 +86,10 @@
   <ItemGroup>
     <Folder Include="Helper\" />
     <Folder Include="MuPdf\" />
-    <Folder Include="NativeLibs\AnyCPU\" />
-    <Folder Include="NativeLibs\x64\" />
-    <Folder Include="NativeLibs\x86\" />
-    <Folder Include="Virtualizing\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\MoonPdfLib\NativeLibs\AnyCPU\libmupdf.dll" Link="NativeLibs\AnyCPU\libmupdf.dll" />
-    <None Include="..\MoonPdfLib\NativeLibs\x64\libmupdf.dll" Link="NativeLibs\x64\libmupdf.dll" />
-    <None Include="..\MoonPdfLib\NativeLibs\x86\libmupdf.dll" Link="NativeLibs\x86\libmupdf.dll" />
+    <ProjectReference Include="..\..\ext\MouseKeyboardActivityMonitor.Core\MouseKeyboardActivityMonitor.Core.csproj" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
@@ -98,7 +97,7 @@
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy $(SolutionDir)\MoonPdfLib\NativeLibs\$(PlatformName)\libmupdf.dll $(TargetDir) /Y" />
+    <Exec Command="xcopy $(ProjectDir)\NativeLibs\$(PlatformName)\libmupdf.dll $(TargetDir) /Y" />
   </Target>
 
 </Project>
