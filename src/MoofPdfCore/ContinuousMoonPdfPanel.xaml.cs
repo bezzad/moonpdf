@@ -89,9 +89,9 @@ namespace MoonPdfLib
 		{
 			var pageTimeout = TimeSpan.FromSeconds(2);
 
-            virtualizingPdfPages?.CleanUpAllPages();
+			virtualizingPdfPages?.CleanUpAllPages();
 
-            virtualizingPdfPages = new AsyncVirtualizingCollection<IEnumerable<PdfImage>>(imageProvider, parent.GetPagesPerRow(), pageTimeout);
+			virtualizingPdfPages = new AsyncVirtualizingCollection<IEnumerable<PdfImage>>(imageProvider, parent.GetPagesPerRow(), pageTimeout);
 			itemsControl.ItemsSource = virtualizingPdfPages;
 		}
 

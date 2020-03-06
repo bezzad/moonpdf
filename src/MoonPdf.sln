@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonPdfLib", "MoonPdfLib\MoonPdfLib.csproj", "{E5C5A57C-E464-4402-AD62-D6119EA92A8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonPdf", "MoonPdf\MoonPdf.csproj", "{0A2C7E6D-E41B-444E-A74F-C396F7912D9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonPdf.Demo", "MoonPdf\MoonPdf.Demo.csproj", "{0A2C7E6D-E41B-444E-A74F-C396F7912D9D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseKeyboardActivityMonitor", "..\ext\MouseKeyboardActivityMonitor\MouseKeyboardActivityMonitor.csproj", "{F52AA97E-180A-40ED-8F2B-09080171D6C7}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MouseKeyboardActivityMonitor.Core", "..\ext\MouseKeyboardActivityMonitor.Core\MouseKeyboardActivityMonitor.Core.csproj", "{F34B8683-B178-4F19-B596-8ADDA5A0DC19}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{B21119C7-265D-406C-8AF3-01FA4F586EAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonPdf.Core.Demo", "MoonPdf.Core.Demo\MoonPdf.Core.Demo.csproj", "{CC2049B1-2355-4862-BB2A-E2F517D40B41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,18 @@ Global
 		{F34B8683-B178-4F19-B596-8ADDA5A0DC19}.Release|x64.Build.0 = Release|Any CPU
 		{F34B8683-B178-4F19-B596-8ADDA5A0DC19}.Release|x86.ActiveCfg = Release|Any CPU
 		{F34B8683-B178-4F19-B596-8ADDA5A0DC19}.Release|x86.Build.0 = Release|Any CPU
+		{CC2049B1-2355-4862-BB2A-E2F517D40B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC2049B1-2355-4862-BB2A-E2F517D40B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC2049B1-2355-4862-BB2A-E2F517D40B41}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CC2049B1-2355-4862-BB2A-E2F517D40B41}.Debug|x64.Build.0 = Debug|Any CPU
+		{CC2049B1-2355-4862-BB2A-E2F517D40B41}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CC2049B1-2355-4862-BB2A-E2F517D40B41}.Debug|x86.Build.0 = Debug|Any CPU
+		{CC2049B1-2355-4862-BB2A-E2F517D40B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC2049B1-2355-4862-BB2A-E2F517D40B41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC2049B1-2355-4862-BB2A-E2F517D40B41}.Release|x64.ActiveCfg = Release|Any CPU
+		{CC2049B1-2355-4862-BB2A-E2F517D40B41}.Release|x64.Build.0 = Release|Any CPU
+		{CC2049B1-2355-4862-BB2A-E2F517D40B41}.Release|x86.ActiveCfg = Release|Any CPU
+		{CC2049B1-2355-4862-BB2A-E2F517D40B41}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +109,7 @@ Global
 		{0A2C7E6D-E41B-444E-A74F-C396F7912D9D} = {B21119C7-265D-406C-8AF3-01FA4F586EAF}
 		{F52AA97E-180A-40ED-8F2B-09080171D6C7} = {FC019D2F-E7FE-4BBF-B742-6661BACE5D60}
 		{F34B8683-B178-4F19-B596-8ADDA5A0DC19} = {FC019D2F-E7FE-4BBF-B742-6661BACE5D60}
+		{CC2049B1-2355-4862-BB2A-E2F517D40B41} = {B21119C7-265D-406C-8AF3-01FA4F586EAF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A261673-7795-4566-B0EF-218BA78DC7E0}

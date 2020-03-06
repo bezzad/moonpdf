@@ -70,25 +70,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ContinuousMoonPdfPanel.xaml.cs">
-      <DependentUpon>ContinuousMoonPdfPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="MoonPdfPanel.xaml.cs">
-      <DependentUpon>MoonPdfPanel.xaml</DependentUpon>
-    </Compile>
     <Compile Update="SinglePageMoonPdfPanel.xaml.cs">
       <DependentUpon>SinglePageMoonPdfPanel.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="ContinuousMoonPdfPanel.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="MoonPdfPanel.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="SinglePageMoonPdfPanel.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

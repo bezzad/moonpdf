@@ -1,0 +1,70 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>MoonPdf</RootNamespace>
+    <Description>A WPF-based PDF Viewer application that uses the MoonPdfLib library</Description>
+    <PackageId>MoonPdf</PackageId>
+    <Version>0.3.1.0</Version>
+    <Authors>Bezzad</Authors>
+    <Product>MoonPdf</Product>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy $(SolutionDir)\MoonPdfCore\NativeLibs\$(PlatformName)\libmupdf.dll $(TargetDir) /Y" />
+  </Target>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="$(SolutionDir)..\bin\HeaderLicensePrepend\HeaderLicensePrepend.exe $(ProjectDir)headertemplate.json" />
+  </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MoofPdfCore\MoofPdfCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="GotoPageDialog.xaml.cs">
+      <DependentUpon>GotoPageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="PdfPasswordDialog.xaml.cs">
+      <DependentUpon>PdfPasswordDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="GotoPageDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PdfPasswordDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
