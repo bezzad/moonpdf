@@ -4,6 +4,16 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+
+    <TieredCompilationQuickJit>true</TieredCompilationQuickJit>
+    <TieredCompilation>true</TieredCompilation>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <UseAppHost>true</UseAppHost>
+    <RuntimeIdentifier>win10-x86</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
+    <PublishReadyToRun>true</PublishReadyToRun>
+
     <RootNamespace>MoonPdf</RootNamespace>
     <Description>A WPF-based PDF Viewer application that uses the MoonPdfLib library</Description>
     <PackageId>MoonPdf</PackageId>
