@@ -26,10 +26,6 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="$(SolutionDir)\..\bin\HeaderLicensePrepend\HeaderLicensePrepend.exe $(ProjectDir)\headertemplate.json" />
-  </Target>
-
   <ItemGroup>
     <Content Include="libmupdf.dll" />
   </ItemGroup>
