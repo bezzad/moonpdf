@@ -57,7 +57,8 @@ namespace MoonPdfLib.MuPdf
                 for (var i = 0; i < pageCount; i++)
                 {
                     var p = NativeMethods.LoadPage(stream.Document, i); // loads the page
-                    var pageBound = NativeMethods.BoundPage(stream.Document, p);
+                    var pageBound = new Rectangle();
+                    NativeMethods.BoundPage(stream.Document, p, ref pageBound);
 
                     resultBounds[i] = sizeCallback(pageBound.Width, pageBound.Height);
 
@@ -94,12 +95,13 @@ namespace MoonPdfLib.MuPdf
 
         private static bool NeedsPassword(IntPtr doc)
         {
-            return NativeMethods.NeedsPassword(doc) != 0;
+            return false;// NativeMethods.NeedsPassword(doc) != 0;
         }
 
         static Bitmap RenderPage(IntPtr context, IntPtr document, IntPtr page, float zoomFactor)
         {
-            var pageBound = NativeMethods.BoundPage(document, page);
+            var pageBound = new Rectangle();
+            NativeMethods.BoundPage(document, page, ref pageBound);
             var ctm = new Matrix();
             var pix = IntPtr.Zero;
             var dev = IntPtr.Zero;
@@ -117,14 +119,14 @@ namespace MoonPdfLib.MuPdf
             ctm.D = zoomY;
 
             // creates a pixmap the same size as the width and height of the page
-            pix = NativeMethods.NewPixmap(context, NativeMethods.FindDeviceColorSpace(context, "DeviceRGB"), width, height);
+            pix = NativeMethods.NewPixmap(context, NativeMethods.LookupDeviceColorSpace(context, "DeviceRGB"), width, height);
             // sets white color as the background color of the pixmap
             NativeMethods.ClearPixmap(context, pix, 0xFF);
 
             // creates a drawing device
             dev = NativeMethods.NewDrawDevice(context, pix);
             // draws the page on the device created from the pixmap
-            NativeMethods.RunPage(document, page, dev, ctm, IntPtr.Zero);
+            NativeMethods.RunPage(document, page, dev, ref ctm, IntPtr.Zero);
 
             NativeMethods.FreeDevice(dev); // frees the resources consumed by the device
             dev = IntPtr.Zero;
@@ -178,17 +180,17 @@ namespace MoonPdfLib.MuPdf
             {
                 if (source is FileSource fs)
                 {
-                    Context = NativeMethods.NewContext(IntPtr.Zero, IntPtr.Zero, FZ_STORE_DEFAULT); // Creates the context
+                    Context = NativeMethods.NewContext(); // Creates the context
                     Stream = NativeMethods.OpenFile(Context, fs.Filename); // opens file as a stream
-                    Document = NativeMethods.OpenDocumentStream(Context, ".pdf", Stream); // opens the document
+                    Document = NativeMethods.OpenDocumentStream(Context, Stream); // opens the document
                 }
                 else if (source is MemorySource ms)
                 {
-                    Context = NativeMethods.NewContext(IntPtr.Zero, IntPtr.Zero, FZ_STORE_DEFAULT); // Creates the context
+                    Context = NativeMethods.NewContext(); // Creates the context
                     var pinnedArray = GCHandle.Alloc(ms.Bytes, GCHandleType.Pinned);
                     var pointer = pinnedArray.AddrOfPinnedObject();
                     Stream = NativeMethods.OpenStream(Context, pointer, ms.Bytes.Length); // opens file as a stream
-                    Document = NativeMethods.OpenDocumentStream(Context, ".pdf", Stream); // opens the document
+                    Document = NativeMethods.OpenDocumentStream(Context, Stream); // opens the document
                     pinnedArray.Free();
                 }
             }
@@ -203,67 +205,80 @@ namespace MoonPdfLib.MuPdf
 
         private static class NativeMethods
         {
-            [DllImport("libmupdf.dll", EntryPoint = "fz_new_context", CallingConvention = CallingConvention.Cdecl)]
-            public static extern IntPtr NewContext(IntPtr alloc, IntPtr locks, uint max_store);
+            const uint FZ_STORE_DEFAULT = 256 << 20;
+            const string DLL = "libmupdf.dll";
+            // please modify the version number to match the FZ_VERSION definition in "fitz\version.h" file
+            const string MuPDFVersion = "1.6";
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_free_context", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "fz_new_context_imp")]
+            static extern IntPtr NewContext(IntPtr alloc, IntPtr locks, uint max_store, string version);
+            public static IntPtr NewContext()
+            {
+                return NewContext(IntPtr.Zero, IntPtr.Zero, FZ_STORE_DEFAULT, MuPDFVersion);
+            }
+
+
+            [DllImport(DLL, EntryPoint = "fz_free_context")]
             public static extern IntPtr FreeContext(IntPtr ctx);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_open_file_w", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "fz_open_file_w", CharSet = CharSet.Unicode)]
             public static extern IntPtr OpenFile(IntPtr ctx, string fileName);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_open_document_with_stream", CallingConvention = CallingConvention.Cdecl)]
-            public static extern IntPtr OpenDocumentStream(IntPtr ctx, string magic, IntPtr stm);
+            [DllImport(DLL, EntryPoint = "pdf_open_document_with_stream")]
+            public static extern IntPtr OpenDocumentStream(IntPtr ctx, IntPtr stm);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_close", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "fz_close")]
             public static extern IntPtr CloseStream(IntPtr stm);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_close_document", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "pdf_close_document")]
             public static extern IntPtr CloseDocument(IntPtr doc);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_count_pages", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "pdf_count_pages")]
             public static extern int CountPages(IntPtr doc);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_bound_page", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "pdf_bound_page")]
+            public static extern void BoundPage(IntPtr doc, IntPtr page, ref Rectangle bound);
+
+            [DllImport(DLL, EntryPoint = "fz_bound_page", CallingConvention = CallingConvention.Cdecl)]
             public static extern Rectangle BoundPage(IntPtr doc, IntPtr page);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_clear_pixmap_with_value", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "fz_clear_pixmap_with_value")]
             public static extern void ClearPixmap(IntPtr ctx, IntPtr pix, int byteValue);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_find_device_colorspace", CallingConvention = CallingConvention.Cdecl)]
-            public static extern IntPtr FindDeviceColorSpace(IntPtr ctx, string colorspace);
+            [DllImport(DLL, EntryPoint = "fz_lookup_device_colorspace")]
+            public static extern IntPtr LookupDeviceColorSpace(IntPtr ctx, string colorspace);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_free_device", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "fz_free_device")]
             public static extern void FreeDevice(IntPtr dev);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_free_page", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "pdf_free_page")]
             public static extern void FreePage(IntPtr doc, IntPtr page);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_load_page", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "pdf_load_page")]
             public static extern IntPtr LoadPage(IntPtr doc, int pageNumber);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_new_draw_device", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "fz_new_draw_device")]
             public static extern IntPtr NewDrawDevice(IntPtr ctx, IntPtr pix);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_new_pixmap", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "fz_new_pixmap")]
             public static extern IntPtr NewPixmap(IntPtr ctx, IntPtr colorspace, int width, int height);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_run_page", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void RunPage(IntPtr doc, IntPtr page, IntPtr dev, Matrix transform, IntPtr cookie);
+            [DllImport(DLL, EntryPoint = "pdf_run_page")]
+            public static extern void RunPage(IntPtr doc, IntPtr page, IntPtr dev, ref Matrix transform, IntPtr cookie);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_drop_pixmap", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "fz_drop_pixmap")]
             public static extern void DropPixmap(IntPtr ctx, IntPtr pix);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_pixmap_samples", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "fz_pixmap_samples")]
             public static extern IntPtr GetSamples(IntPtr ctx, IntPtr pix);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_needs_password", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "fz_needs_password", CallingConvention = CallingConvention.Cdecl)]
             public static extern int NeedsPassword(IntPtr doc);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_authenticate_password", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "fz_authenticate_password", CallingConvention = CallingConvention.Cdecl)]
             public static extern int AuthenticatePassword(IntPtr doc, string password);
 
-            [DllImport("libmupdf.dll", EntryPoint = "fz_open_memory", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+            [DllImport(DLL, EntryPoint = "fz_open_memory", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
             public static extern IntPtr OpenStream(IntPtr ctx, IntPtr data, int len);
         }
     }
