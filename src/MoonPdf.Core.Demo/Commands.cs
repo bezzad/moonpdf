@@ -1,23 +1,4 @@
-/*! MoonPdf - A WPF-based PDF Viewer application that uses the MoonPdfLib library
-Copyright (C) 2013  (see AUTHORS file)
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-!*/
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
 
@@ -35,7 +16,7 @@ namespace MoonPdf
 		public DelegateCommand PreviousPageCommand { get; }
 		public DelegateCommand FirstPageCommand { get; }
 		public DelegateCommand LastPageCommand { get; }
-		
+
 		public DelegateCommand SinglePageCommand { get; }
 		public DelegateCommand FacingCommand { get; }
 		public DelegateCommand BookViewCommand { get; }
@@ -60,19 +41,19 @@ namespace MoonPdf
 
 			OpenCommand = new DelegateCommand("Open...", f =>
 				{
-					var dlg = new Microsoft.Win32.OpenFileDialog { Title = "Select PDF file...", DefaultExt = ".pdf", Filter = "PDF file (.pdf)|*.pdf",CheckFileExists = true };
+					var dlg = new Microsoft.Win32.OpenFileDialog { Title = "Select PDF file...", DefaultExt = ".pdf", Filter = "PDF file (.pdf)|*.pdf", CheckFileExists = true };
 
-                    if (dlg.ShowDialog() == true)
-                    {
-                        try
-                        {
-                            pdfPanel.OpenFile(dlg.FileName);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(string.Format("An error occured: " + ex.Message));
-                        }
-                    }
+					if (dlg.ShowDialog() == true)
+					{
+						try
+						{
+							pdfPanel.OpenFile(dlg.FileName);
+						}
+						catch (Exception ex)
+						{
+							MessageBox.Show(string.Format("An error occured: " + ex.Message));
+						}
+					}
 				}, f => true, new KeyGesture(Key.O, ModifierKeys.Control));
 
 			ExitCommand = new DelegateCommand("Exit", f => wnd.Close(), f => true, new KeyGesture(Key.Q, ModifierKeys.Control));
