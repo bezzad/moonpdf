@@ -1,7 +1,4 @@
 using MoonPdfLib.Helper;
-/*
- * 2013 - Modified and extended version of W. Jordan's code (see AUTHORS file)
- */
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;

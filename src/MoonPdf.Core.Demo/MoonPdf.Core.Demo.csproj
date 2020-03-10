@@ -27,12 +27,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="libmupdf.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="libmupdf.dll" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" ExcludeFromSingleFile="False" />
   </ItemGroup>
 
